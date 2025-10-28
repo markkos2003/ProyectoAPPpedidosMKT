@@ -1,0 +1,7 @@
+{
+  "name": "practicaAPpedidosMKT",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

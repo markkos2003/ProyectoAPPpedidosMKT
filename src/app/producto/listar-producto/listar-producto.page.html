@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>listar-producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">listar-producto</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button  (click)="registrarproducto()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+<ion-list>
+
+
+<ion-item><ion-card>  prod1      </ion-card>   <ion-buttons slot="end">
+      <ion-button color="primary">
+        <ion-icon slot="icon-only" name="create"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" >
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons> </ion-item>
+<ion-item><ion-card>  prod2     </ion-card>  <ion-buttons slot="end">
+      <ion-button color="primary" >
+        <ion-icon slot="icon-only" name="create"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" >
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons> </ion-item>
+
+
+
+
+
+
+
+
+
+
+</ion-list>
+
+
+
+
+
+
+
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>registrar-cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">registrar-cliente</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+ <!--<form (ngSubmit)="registrarCliente()" #clienteForm="ngForm">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" name="nombre" [(ngModel)]="cliente.nombre" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" name="email" [(ngModel)]="cliente.email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Teléfono</ion-label>
+      <ion-input type="tel" name="telefono" [(ngModel)]="cliente.telefono"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!clienteForm.form.valid">Registrar</ion-button>
+  </form>-->
+
+
+  <form>
+
+  <ion-item>  <ion-input  placeholder="Ingrese nombre o razon social" type="text"></ion-input>    </ion-item>
+  <ion-item>  <ion-input  placeholder="Ingrese número de teléfono" type="text"></ion-input>    </ion-item>
+  <ion-item>  <ion-input  placeholder="Ingrese DNI" type="text"></ion-input>    </ion-item>
+  <ion-item>  <ion-input  placeholder="Ingrese RUC" type="text"></ion-input>    </ion-item> 
+  <ion-item>  <ion-input  placeholder="Ingrese dirección" type="text"></ion-input>    </ion-item>
+  <ion-item>  <ion-input  placeholder="Correo" type="text"></ion-input>    </ion-item>
+  <ion-item>  <ion-button type="submit" > REGISTRAR</ion-button>    </ion-item>
+
+
+  
+
+  </form>
+
+
+
+
+
+</ion-content>
