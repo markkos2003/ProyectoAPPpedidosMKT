@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registrar-cliente',
@@ -7,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class RegistrarClientePage implements OnInit {
+
+
+
+  clienteForm: FormGroup;
 
   constructor() { }
 
