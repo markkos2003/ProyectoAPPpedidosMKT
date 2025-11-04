@@ -1,4 +1,4 @@
-ion-content {
+/*ion-content {
   display: flex !important;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@ ion-content {
   --offset-bottom: 0 !important;
   background-color: #216d8b;
   padding: 20px;
-  overflow: hidden; /* evita scroll inesperado */
+  overflow: hidden; /* evita scroll inesperado 
 }
 
 form {
@@ -21,4 +21,133 @@ form {
   max-width: 400px;
   margin: 0 auto;
   text-align: center;
+}*/
+
+// login.page.scss
+
+ion-header {
+  ion-toolbar {
+    --background: #4BC3C8;
+    --color: white;
+    
+    ion-title {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+ion-content {
+  --background: #4BC3C8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Contenedor del formulario centrado
+ion-content::part(scroll) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+form {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 350px;
+  
+  ion-item {
+    --background: transparent;
+    --border-color: #d0d0d0;
+    --border-width: 0 0 1px 0;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    --min-height: 50px;
+    margin-bottom: 20px;
+    
+    ion-label {
+      font-weight: 500;
+      color: #666666;
+      font-size: 14px;
+    }
+    
+    ion-input {
+      --padding-top: 12px;
+      --padding-bottom: 8px;
+      font-size: 15px;
+      color: #333333;
+    }
+    
+    &.item-has-focus {
+      --border-color: #4BC3C8;
+      --highlight-color-focused: #4BC3C8;
+    }
+  }
+  
+  ion-button {
+    --border-radius: 8px;
+    --background: #FF6B35;
+    --background-activated: #e55a2a;
+    --background-hover: #ff7d4d;
+    --box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+    height: 48px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 20px;
+    
+    &:hover {
+      --box-shadow: 0 6px 16px rgba(255, 107, 53, 0.4);
+    }
+  }
+  
+  .error-message,
+  div[style*="color:red"] {
+    color: #f44336 !important;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+    padding: 10px;
+    background: #ffebee;
+    border-radius: 6px;
+  }
+}
+
+// Animación de entrada suave
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+form {
+  animation: fadeIn 0.4s ease-out;
+}
+
+// Responsive
+@media (max-width: 576px) {
+  form {
+    width: 92%;
+    padding: 25px 20px;
+  }
+  
+  ion-item {
+    --min-height: 45px;
+  }
+  
+  ion-button {
+    height: 45px;
+    font-size: 14px;
+  }
 }

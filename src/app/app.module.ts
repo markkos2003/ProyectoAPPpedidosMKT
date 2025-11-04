@@ -23,6 +23,7 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(environment.firebaseConfig)],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),Mostrar,Basedatos],
   bootstrap: [AppComponent],
 })
