@@ -1,0 +1,112 @@
+// login.page.scss
+
+ion-header {
+  ion-toolbar {
+    --background: #4BC3C8;
+    --color: white;
+    
+    ion-title {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+ion-content {
+  --background: #4BC3C8;
+}
+
+// Contenedor que centra verticalmente
+ion-content::part(scroll) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+form {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  width: 90%;
+  max-width: 400px;
+  
+  ion-item {
+    --background: transparent;
+    --border-color: #e0e0e0;
+    --border-width: 0 0 2px 0;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    margin-bottom: 20px;
+    
+    ion-label {
+      font-weight: 600;
+      color: #495057;
+      font-size: 14px;
+    }
+    
+    ion-input {
+      --padding-top: 10px;
+      --padding-bottom: 10px;
+      font-size: 15px;
+      color: #2c3e50;
+    }
+    
+    &.item-has-focus {
+      --border-color: #FF6B35;
+      --highlight-color-focused: #FF6B35;
+    }
+  }
+  
+  ion-button {
+    --border-radius: 10px;
+    --background: #FF6B35;
+    --box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+    height: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 25px;
+    
+    &:hover {
+      --box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+    }
+  }
+  
+  .error-message {
+    color: #f44336;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    padding: 10px;
+    background: #ffebee;
+    border-radius: 8px;
+  }
+}
+
+// Animación de entrada
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+form {
+  animation: slideIn 0.4s ease-out;
+}
+
+// Responsive
+@media (max-width: 576px) {
+  form {
+    width: 95%;
+    padding: 30px 20px;
+  }
+}

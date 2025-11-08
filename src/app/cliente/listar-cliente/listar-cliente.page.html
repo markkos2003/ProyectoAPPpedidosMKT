@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>LISTAR-CLIENTE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item lines="none" *ngFor="let cliente of clientes">
+      <div class="cliente-info">
+        <ion-text class="client-name">{{ cliente.nombre }}</ion-text>
+        <ion-text class="client-detail" *ngIf="cliente.telefono">
+          <ion-icon name="call-outline"></ion-icon> {{ cliente.telefono }}
+        </ion-text>
+      </div>
+      <ion-buttons slot="end">
+        <ion-button color="primary" (click)="editarCliente(cliente)">
+          <ion-icon slot="icon-only" name="create"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="eliminarCliente(cliente)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-item lines="none" *ngIf="clientes.length === 0">
+      <ion-text class="no-data">No hay clientes registrados</ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button (click)="registrarCliente()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

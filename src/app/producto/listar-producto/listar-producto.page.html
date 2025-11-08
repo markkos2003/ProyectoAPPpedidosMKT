@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>LISTAR-PRODUCTO</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">LISTAR-PRODUCTO</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item lines="none" *ngFor="let producto of productos">
+      <div class="producto-info">
+        <img *ngIf="producto.imagen" [src]="producto.imagen" alt="producto" class="producto-imagen">
+        <ion-text class="product-name">{{ producto.nombre }}</ion-text>
+      </div>
+      <ion-buttons slot="end">
+        <ion-button color="primary" (click)="editarProducto(producto)">
+          <ion-icon slot="icon-only" name="create"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="eliminarProducto(producto)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-item lines="none" *ngIf="productos.length === 0">
+      <ion-text class="no-data">No hay productos registrados</ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button (click)="registrarproducto()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

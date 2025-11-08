@@ -1,0 +1,148 @@
+ion-header {
+  ion-toolbar {
+    --background: #8B5CF6;
+    --color: white;
+    
+    ion-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+  }
+}
+
+ion-content {
+  --background: #8B5CF6;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-top: 10px;
+}
+
+ion-list {
+  background: transparent;
+  padding: 0;
+}
+
+ion-item {
+  --background: white;
+  --border-radius: 15px;
+  --padding-start: 20px;
+  --padding-end: 10px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.producto-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.producto-imagen {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.no-data {
+  color: #666666;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+}
+
+ion-text {
+  color: #000000 !important;
+  background: transparent !important;
+}
+
+ion-buttons {
+  ion-button {
+    --border-radius: 8px;
+    margin-left: 5px;
+    
+    ion-icon {
+      font-size: 20px;
+    }
+  }
+}
+
+ion-fab-button {
+  --background: #8B5CF6;
+  --background-activated: #7C3AED;
+  --background-hover: #9D71F7;
+  --box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+  
+  ion-icon {
+    font-size: 28px;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+ion-item {
+  animation: fadeInUp 0.4s ease-out backwards;
+}
+
+ion-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+ion-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+ion-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+ion-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@media (max-width: 576px) {
+  ion-item {
+    --padding-start: 15px;
+  }
+  
+  .product-name {
+    font-size: 14px;
+  }
+  
+  .producto-imagen {
+    width: 40px;
+    height: 40px;
+  }
+  
+  ion-buttons {
+    ion-button {
+      ion-icon {
+        font-size: 18px;
+      }
+    }
+  }
+}

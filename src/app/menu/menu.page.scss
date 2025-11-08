@@ -1,0 +1,158 @@
+// menu.page.scss
+
+ion-header {
+  ion-toolbar {
+    --background: #4BC3C8;
+    --color: white;
+    
+    ion-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+  }
+}
+
+ion-content {
+  --background: #4BC3C8;
+}
+
+ion-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px);
+  padding: 30px 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+ion-row {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+ion-row:last-child {
+  margin-bottom: 0;
+}
+
+ion-col {
+  padding: 8px;
+}
+
+ion-card {
+  margin: 0;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+ion-card:active {
+  transform: translateY(-2px);
+}
+
+ion-card-header {
+  padding: 20px 15px;
+  width: 100%;
+  text-align: center;
+}
+
+ion-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
+ion-footer {
+  ion-toolbar {
+    --background: #2c3e50;
+    --color: white;
+    --min-height: 56px;
+  }
+  
+  ion-button {
+    --color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+  
+  ion-button:hover {
+    --background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+ion-card {
+  animation: fadeInUp 0.5s ease-out backwards;
+}
+
+ion-row:nth-child(1) ion-col:nth-child(1) ion-card {
+  animation-delay: 0.1s;
+}
+
+ion-row:nth-child(1) ion-col:nth-child(2) ion-card {
+  animation-delay: 0.2s;
+}
+
+ion-row:nth-child(2) ion-col:nth-child(1) ion-card {
+  animation-delay: 0.3s;
+}
+
+ion-row:nth-child(2) ion-col:nth-child(2) ion-card {
+  animation-delay: 0.4s;
+}
+
+@media (max-width: 576px) {
+  ion-grid {
+    padding: 20px 12px;
+  }
+  
+  ion-card {
+    min-height: 100px;
+  }
+  
+  ion-card-header {
+    padding: 16px 12px;
+  }
+  
+  ion-card-title {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  ion-card {
+    min-height: 130px;
+  }
+  
+  ion-card-title {
+    font-size: 18px;
+  }
+}

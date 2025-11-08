@@ -1,0 +1,122 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>VISUALIZAR PEDIDOS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Barra de búsqueda -->
+  <ion-searchbar 
+    [(ngModel)]="terminoBusqueda"
+    (ionInput)="buscarPedidos()"
+    placeholder="Buscar por cliente o producto"
+    animated>
+  </ion-searchbar>
+
+  <!-- Filtros por estado -->
+  <div class="filtros-container">
+    <ion-button 
+      [class.activo]="filtroEstado === 'proceso'"
+      (click)="filtrarPorEstado('proceso')"
+      class="btn-proceso">
+      EN PROCESO
+    </ion-button>
+    
+    <ion-button 
+      [class.activo]="filtroEstado === 'cancelado'"
+      (click)="filtrarPorEstado('cancelado')"
+      class="btn-cancelado">
+      CANCELADO
+    </ion-button>
+    
+    <ion-button 
+      [class.activo]="filtroEstado === 'recibido'"
+      (click)="filtrarPorEstado('recibido')"
+      class="btn-recibido">
+      RECIBIDO
+    </ion-button>
+
+    <ion-button 
+      [class.activo]="filtroEstado === 'todos'"
+      (click)="filtrarPorEstado('todos')"
+      fill="outline">
+      TODOS
+    </ion-button>
+  </div>
+
+  <!-- Lista de pedidos -->
+  <ion-list>
+    <ion-card *ngFor="let pedido of pedidosFiltrados" class="pedido-card">
+      <ion-card-header>
+        <div class="pedido-header">
+          <div>
+            <ion-card-title>{{ pedido.clienteNombre }}</ion-card-title>
+            <ion-card-subtitle>
+              <ion-icon name="calendar-outline"></ion-icon>
+              {{ pedido.fecha | date:'dd/MM/yyyy HH:mm' }}
+            </ion-card-subtitle>
+          </div>
+          <ion-badge 
+            [color]="getColorEstado(pedido.estado)"
+            class="estado-badge">
+            {{ pedido.estado.toUpperCase() }}
+          </ion-badge>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <!-- Productos del pedido -->
+        <div class="productos-lista">
+          <div *ngFor="let item of pedido.items" class="producto-item">
+            <ion-icon name="cube-outline"></ion-icon>
+            <span class="producto-nombre">{{ item.productoNombre }}</span>
+            <span class="producto-cantidad">x{{ item.cantidad }}</span>
+            <span class="producto-precio">S/ {{ item.subtotal.toFixed(2) }}</span>
+          </div>
+        </div>
+
+        <!-- Total -->
+        <div class="total-pedido">
+          <strong>Total: S/ {{ pedido.total.toFixed(2) }}</strong>
+        </div>
+
+        <!-- Notas -->
+        <div *ngIf="pedido.notas" class="notas">
+          <ion-icon name="document-text-outline"></ion-icon>
+          <span>{{ pedido.notas }}</span>
+        </div>
+
+        <!-- Acciones -->
+        <div class="acciones-pedido">
+          <ion-button 
+            size="small" 
+            fill="outline" 
+            color="warning"
+            (click)="cambiarEstado(pedido)">
+            <ion-icon slot="start" name="sync-outline"></ion-icon>
+            Cambiar Estado
+          </ion-button>
+
+          <ion-button 
+            size="small" 
+            fill="clear" 
+            color="danger"
+            (click)="eliminarPedido(pedido)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Mensaje cuando no hay pedidos -->
+    <ion-card *ngIf="pedidosFiltrados.length === 0" class="no-pedidos">
+      <ion-card-content>
+        <ion-icon name="document-outline" class="icono-grande"></ion-icon>
+        <p>No hay pedidos para mostrar</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

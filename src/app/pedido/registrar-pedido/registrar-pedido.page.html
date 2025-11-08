@@ -1,0 +1,109 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>REGISTRAR PEDIDO</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="form-container">
+    <form (ngSubmit)="registrarPedido()">
+      
+      <!-- Seleccionar Cliente -->
+      <ion-item>
+        <ion-label position="floating">Seleccionar Cliente *</ion-label>
+        <ion-select 
+          [(ngModel)]="pedido.clienteId" 
+          name="clienteId" 
+          (ionChange)="onClienteChange()"
+          interface="alert"
+          required>
+          <ion-select-option *ngFor="let cliente of clientes" [value]="cliente.id">
+            {{ cliente.nombre }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Lista de productos agregados -->
+      <div class="productos-section" *ngIf="pedido.items.length > 0">
+        <h3>Productos Agregados</h3>
+        <ion-card *ngFor="let item of pedido.items; let i = index" class="producto-card">
+          <ion-card-content>
+            <div class="producto-info">
+              <div class="producto-detalle">
+                <strong>{{ item.productoNombre }}</strong>
+                <p>S/ {{ item.precio }} x {{ item.cantidad }}</p>
+                <p class="subtotal">Subtotal: S/ {{ item.subtotal.toFixed(2) }}</p>
+              </div>
+              <ion-button fill="clear" color="danger" (click)="eliminarItem(i)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <!-- Agregar Producto -->
+      <div class="agregar-producto-section">
+        <h3>Agregar Producto</h3>
+        
+        <ion-item>
+          <ion-label position="floating">Producto</ion-label>
+          <ion-select 
+            [(ngModel)]="productoSeleccionado" 
+            name="producto"
+            interface="alert">
+            <ion-select-option *ngFor="let producto of productos" [value]="producto">
+              {{ producto.nombre }} - S/ {{ producto.precio }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Cantidad</ion-label>
+          <ion-input 
+            type="number" 
+            [(ngModel)]="cantidad" 
+            name="cantidad"
+            min="1"
+            [max]="productoSeleccionado?.stock || 999">
+          </ion-input>
+        </ion-item>
+
+        <ion-button 
+          expand="block" 
+          fill="outline" 
+          (click)="agregarProducto()"
+          [disabled]="!productoSeleccionado || cantidad <= 0">
+          <ion-icon slot="start" name="add-circle"></ion-icon>
+          Agregar Producto
+        </ion-button>
+      </div>
+
+      <!-- Total -->
+      <div class="total-section" *ngIf="pedido.items.length > 0">
+        <h2>Total: S/ {{ calcularTotal().toFixed(2) }}</h2>
+      </div>
+
+      <!-- Notas -->
+      <ion-item>
+        <ion-label position="floating">Notas (Opcional)</ion-label>
+        <ion-textarea 
+          [(ngModel)]="pedido.notas" 
+          name="notas"
+          rows="3">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        class="submit-btn"
+        [disabled]="!pedido.clienteId || pedido.items.length === 0">
+        REGISTRAR PEDIDO
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

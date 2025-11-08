@@ -1,0 +1,453 @@
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --color: white;
+    
+    ion-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+    
+    ion-back-button {
+      --color: white;
+    }
+  }
+}
+
+ion-content {
+  --background: linear-gradient(to bottom, #f5f7fa 0%, #e8ecf1 100%);
+}
+
+// Barra de búsqueda mejorada
+ion-searchbar {
+  --background: white;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --icon-color: #667eea;
+  --placeholder-color: #95a5a6;
+  padding: 15px 15px 10px 15px;
+  
+  &::part(native) {
+    border-radius: 12px;
+  }
+}
+
+// Contenedor de filtros mejorado
+.filtros-container {
+  display: flex;
+  gap: 10px;
+  padding: 10px 15px 20px 15px;
+  overflow-x: auto;
+  background: transparent;
+  
+  // Ocultar scrollbar pero mantener funcionalidad
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  
+  ion-button {
+    --border-radius: 25px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    flex-shrink: 0;
+    height: 42px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    &.activo {
+      font-weight: 700;
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  .btn-proceso {
+    --background: #f39c12;
+    --background-activated: #e67e22;
+    --color: white;
+    
+    &.activo {
+      --background: #e67e22;
+    }
+  }
+  
+  .btn-cancelado {
+    --background: #e74c3c;
+    --background-activated: #c0392b;
+    --color: white;
+    
+    &.activo {
+      --background: #c0392b;
+    }
+  }
+  
+  .btn-recibido {
+    --background: #27ae60;
+    --background-activated: #229954;
+    --color: white;
+    
+    &.activo {
+      --background: #229954;
+    }
+  }
+  
+  ion-button[fill="outline"] {
+    --border-color: #667eea;
+    --color: #667eea;
+    --background: white;
+    
+    &.activo {
+      --background: #667eea;
+      --color: white;
+      --border-color: #667eea;
+    }
+  }
+}
+
+// Lista de pedidos
+ion-list {
+  background: transparent;
+  padding: 0 15px 20px 15px;
+}
+
+// Tarjeta de pedido mejorada
+.pedido-card {
+  margin-bottom: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  background: white;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  ion-card-header {
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border-bottom: 2px solid #f0f0f0;
+  }
+  
+  ion-card-content {
+    padding: 20px;
+  }
+}
+
+// Header del pedido
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  
+  > div {
+    flex: 1;
+  }
+  
+  ion-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  
+  ion-card-subtitle {
+    font-size: 14px;
+    color: #7f8c8d;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    
+    ion-icon {
+      font-size: 16px;
+      color: #95a5a6;
+    }
+  }
+}
+
+// Badge de estado mejorado
+.estado-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+}
+
+// Lista de productos mejorada
+.productos-lista {
+  margin: 20px 0;
+  padding: 15px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.producto-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #dee2e6;
+  
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  &:first-child {
+    padding-top: 0;
+  }
+  
+  ion-icon {
+    color: #667eea;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  
+  .producto-nombre {
+    flex: 1;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  
+  .producto-cantidad {
+    color: #7f8c8d;
+    font-size: 14px;
+    font-weight: 600;
+    background: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    min-width: 40px;
+    text-align: center;
+  }
+  
+  .producto-precio {
+    font-weight: 700;
+    color: #27ae60;
+    font-size: 15px;
+    min-width: 70px;
+    text-align: right;
+  }
+}
+
+// Total del pedido mejorado
+.total-pedido {
+  margin: 20px 0;
+  padding: 18px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  
+  strong {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    display: block;
+  }
+}
+
+// Notas mejoradas
+.notas {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 15px 0;
+  padding: 15px;
+  background: linear-gradient(135deg, #fff3cd 0%, #ffe9a3 100%);
+  border-left: 4px solid #f39c12;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(243, 156, 18, 0.1);
+  
+  ion-icon {
+    color: #f39c12;
+    font-size: 22px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  
+  span {
+    flex: 1;
+    font-size: 14px;
+    color: #856404;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+}
+
+// Acciones del pedido mejoradas
+.acciones-pedido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #f0f0f0;
+  
+  ion-button {
+    --border-radius: 10px;
+    font-weight: 600;
+    
+    &[size="small"] {
+      height: 38px;
+    }
+    
+    &[fill="outline"] {
+      --border-width: 2px;
+    }
+  }
+}
+
+// Mensaje sin pedidos mejorado
+.no-pedidos {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  margin: 20px 0;
+  
+  ion-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .icono-grande {
+    font-size: 80px;
+    color: #bdc3c7;
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  p {
+    color: #7f8c8d;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+// Animaciones
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pedido-card {
+  animation: fadeInUp 0.4s ease-out backwards;
+}
+
+.pedido-card:nth-child(1) { animation-delay: 0.05s; }
+.pedido-card:nth-child(2) { animation-delay: 0.1s; }
+.pedido-card:nth-child(3) { animation-delay: 0.15s; }
+.pedido-card:nth-child(4) { animation-delay: 0.2s; }
+.pedido-card:nth-child(5) { animation-delay: 0.25s; }
+
+// Responsive
+@media (max-width: 576px) {
+  .pedido-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .estado-badge {
+    align-self: flex-start;
+  }
+  
+  .producto-item {
+    flex-wrap: wrap;
+    gap: 8px;
+    
+    .producto-nombre {
+      flex-basis: 100%;
+      order: 1;
+    }
+    
+    ion-icon {
+      order: 0;
+    }
+    
+    .producto-cantidad,
+    .producto-precio {
+      order: 2;
+    }
+  }
+  
+  .acciones-pedido {
+    flex-direction: column;
+    gap: 10px;
+    
+    ion-button {
+      width: 100%;
+    }
+  }
+  
+  .total-pedido strong {
+    font-size: 20px;
+  }
+}
+
+// Estilos para scroll suave
+ion-content {
+  --offset-bottom: auto !important;
+  --overflow: hidden;
+  overflow: auto;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.3);
+    border-radius: 3px;
+    
+    &:hover {
+      background: rgba(102, 126, 234, 0.5);
+    }
+  }
+}

@@ -1,0 +1,88 @@
+ion-header {
+  ion-toolbar {
+    --background: #8B5CF6;
+    --color: white;
+    
+    ion-title {
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  }
+}
+
+ion-content {
+  --background: #8B5CF6;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 20px;
+}
+
+form {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 500px;
+  
+  ion-item {
+    --background: transparent;
+    --border-color: #d0d0d0;
+    --padding-start: 0;
+    margin-bottom: 20px;
+    
+    ion-label {
+      font-weight: 500;
+      color: #666666;
+      font-size: 14px;
+    }
+    
+    ion-input {
+      font-size: 15px;
+      color: #333333;
+    }
+    
+    &.item-has-focus {
+      --border-color: #8B5CF6;
+      --highlight-color-focused: #8B5CF6;
+    }
+  }
+  
+  .submit-btn {
+    --border-radius: 8px;
+    --background: #8B5CF6;
+    --background-activated: #7C3AED;
+    height: 48px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 25px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+form {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@media (max-width: 576px) {
+  form {
+    width: 95%;
+    padding: 25px 20px;
+  }
+}
