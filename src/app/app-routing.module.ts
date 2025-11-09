@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./cliente/registrar-cliente/registrar-cliente.module').then( m => m.RegistrarClientePageModule)
   },
   {
-    path: 'actualizar-cliente',
+    path: 'actualizar-cliente/:id',
     loadChildren: () => import('./cliente/actualizar-cliente/actualizar-cliente.module').then( m => m.ActualizarClientePageModule)
   },
   {
