@@ -54,7 +54,11 @@ const routes: Routes = [
   {
     path: 'visualizar',
     loadChildren: () => import('./visualizar/visualizar.module').then( m => m.VisualizarPageModule)
+  },  {
+    path: 'registrar-pedido',
+    loadChildren: () => import('./pedido/registrar-pedido/registrar-pedido.module').then( m => m.RegistrarPedidoPageModule)
   },
+
   
 
 ];
