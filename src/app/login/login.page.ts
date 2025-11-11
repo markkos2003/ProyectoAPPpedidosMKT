@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import {Router} from '@angular/router';
 import { Mostrar } from '../mostrar';
 import { Basedatos } from '../servicio/basedatos';
-import { User } from '../models/user.models';
+
 import { getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 
 @Component({

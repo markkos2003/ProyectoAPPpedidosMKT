@@ -1,56 +1,85 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-button routerLink="/listar-producto">
+    <ion-icon slot="icon-only" name="arrow-back"></ion-icon> 
+  </ion-button>
     <ion-title>REGISTRAR PRODUCTO</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registrar-producto</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content> 
+    <form class="ion-padding">
+        
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Información General</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                
+                <ion-item>
+                    <ion-input label="Nombre del Producto" labelPlacement="floating" type="text"></ion-input>
+                </ion-item>
 
-<form>
+                <ion-item>
+                    <ion-textarea label="Descripción (Opcional)" labelPlacement="floating" rows="3"></ion-textarea>
+                </ion-item>
 
-<ion-list>
+                <ion-item>
+                    <ion-input label="Precio de Venta ($)" labelPlacement="floating" type="number"></ion-input>
+                </ion-item>
 
-<ion-item><ion-input type="text" placeholder="nombre"></ion-input></ion-item>
-<ion-item>
-  <ion-select>
+                <ion-item>
+                    <ion-label position="stacked">Seleccionar Imagen (JPG/PNG)</ion-label>
+                    <input type="file" accept="image/png, image/jpeg">
+                </ion-item>
+                
+            </ion-card-content>
+        </ion-card>
 
-<ion-select-option>S</ion-select-option>
-<ion-select-option>L</ion-select-option>
-<ion-select-option>XL</ion-select-option>
+        <ion-card class="ion-margin-top">
+            <ion-card-header>
+                <ion-card-title>Inventario por Talla</ion-card-title>
+                <ion-button size="small" fill="solid" slot="end" color="success">
+                    + Añadir
+                </ion-button>
+            </ion-card-header>
 
-</ion-select>
-</ion-item>
+            <ion-card-content>
+                
+                <ion-row class="ion-align-items-center ion-margin-bottom">
+                    
+                    <ion-col size="5">
+                        <ion-item lines="full">
+                            <ion-select label="Talla" labelPlacement="stacked" placeholder="Selecciona">
+                                <ion-select-option value="S">S</ion-select-option>
+                                <ion-select-option value="M">M</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                    
+                    <ion-col size="5">
+                        <ion-item lines="full">
+                            <ion-input label="Stock" labelPlacement="stacked" type="number" min="0"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    
+                    <ion-col size="2" class="ion-text-center">
+                        <ion-button fill="clear" color="danger" size="small">
+                            X
+                        </ion-button>
+                    </ion-col>
+                
+                </ion-row>
+                </ion-card-content>
+        </ion-card>
 
+        <ion-button expand="block" type="submit" class="ion-margin-top">
+            Registrar Producto
+        </ion-button>
+        
+        <ion-button expand="block" fill="outline" color="medium" class="ion-margin-top">
+            Salir
+        </ion-button>
 
-
-
-
-</ion-list>
-
-
-
-
-
-
-
-
-
-
-
-
-</form>
-
-
-
-
-
-
-
-
-
+    </form>
 </ion-content>

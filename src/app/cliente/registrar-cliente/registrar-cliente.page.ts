@@ -95,6 +95,16 @@ export class RegistrarClientePage implements OnInit {
 
   }
 
+  cancelar(){
+
+     this.clienteForm.reset();
+
+      const activo = document.activeElement as HTMLElement | null;
+      if (activo) activo.blur();
+          this.router.navigate(['/listar-cliente']);
+
+  }
+
 
 marcarCamposComoTocados() {
     Object.keys(this.clienteForm.controls).forEach(field => {
