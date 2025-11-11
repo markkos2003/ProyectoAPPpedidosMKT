@@ -1,5 +1,9 @@
 import { Injectable,inject } from '@angular/core';
-import { AngularFireAuth} from '@angular/fire/compat/auth';
+import { 
+  // 1. Nuevas Importaciones de Auth
+  Auth, // El servicio inyectable de AngularFire para Auth
+  signInWithEmailAndPassword // La función modular que usaremos
+} from '@angular/fire/auth';
 import { 
   Firestore, 
   collection, 
@@ -22,20 +26,16 @@ export class Basedatos {
 
   
 
-  constructor(private auth: AngularFireAuth,private conexion: Firestore){}
-
-
-  /*signIn(user:User){
-
-    return signInWithEmailAndPassword(getAuth(),user.email,user.password);
-  }*/
-
-
-    signIn(correo:string,paas:string){
-
-    return this.auth.signInWithEmailAndPassword(correo,paas);
+  // 2. Inyección de Auth Modular
+  // Inyectamos Auth en lugar de AngularFireAuth
+  constructor(private auth: Auth, private conexion: Firestore){} 
+  
+  
+  // 3. Método signIn refactorizado
+  signIn(correo:string, paas:string){
+    // Usamos la función modular importada, pasándole el servicio 'auth'
+    return signInWithEmailAndPassword(this.auth, correo, paas);
   }
-
 
 
   //METODOS MODULO CLIENTE
@@ -93,7 +93,7 @@ async obtenerClientes() {
     const pedidosSnapshot = await getDocs(q);
 
     if (!pedidosSnapshot.empty) {
-        // 🔴 Lanzar un error con un código específico si hay pedidos
+        //  Lanzar un error con un código específico si hay pedidos
         const error = new Error('Restricción de datos: El cliente tiene pedidos asociados.');
         (error as any).codigo = 'HAS_ORDERS'; // Añadir una propiedad personalizada al error
         throw error;
@@ -117,7 +117,7 @@ async editarCliente(id: string, datosActualizados: any): Promise<void> {
         // Si la promesa se resuelve, la función sale exitosamente (no devuelve nada)
         
     } catch (error) {
-        // 🔴 Lanza el error capturado para que sea manejado por el componente
+        //  Lanza el error capturado para que sea manejado por el componente
         console.error('Error en el servicio al actualizar cliente:', error);
         
         // Podemos lanzar un nuevo error más descriptivo o el original

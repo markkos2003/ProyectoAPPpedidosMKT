@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import { Mostrar } from '../mostrar';
 import { Basedatos } from '../servicio/basedatos';
 
-import { getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+
 
 @Component({
   selector: 'app-login',
@@ -13,11 +13,11 @@ import { getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 })
 export class LoginPage implements OnInit {
 
-  username: string = '' ;
+  correo: string = '' ;
   password: string = '';
   errorMessage: string = '';
 
- //auth = getAuth();
+ 
 
   constructor(private router: Router,private miservicio:Mostrar) { }
 
@@ -27,99 +27,61 @@ export class LoginPage implements OnInit {
 
 
 
-  login(){
-
-  this.serviciobasedatos.signIn(this.username,this.password).then(
-
-res=>{
-
-  const activo = document.activeElement as HTMLElement | null;
-  if (activo) activo.blur();
-
-
-  this.router.navigate(['/menu']);
-
-
-  console.log(res);
-}
-
-
-  ).catch((error)=>{
-
-    if(error.code==='auth/wromg-password'){
-
-      this.miservicio.mustramensaje('contraseña incorrecta');
-    }else{
-
-      this.miservicio.mustramensaje('error al iniciar sesión');
+  async login() {
+    
+    
+    // validacion previa
+    if (!this.correo || !this.password) {
+      this.miservicio.mustramensaje('Debe ingresar un correo electrónico y una contraseña.');
+      this.limpiarFormulario();
+      // Retornamos 
+      return; 
     }
 
+    try {
+      
+      // PASO 2: Llama a signIn si la validación es exitosa
+      
+      const res = await this.serviciobasedatos.signIn(this.correo, this.password);
 
-
-  }
-
-  )
-
-
-   this.limpiarFormulario();
-
-  }
-
-
-
-/*signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Aquí el usuario se ha autenticado correctamente
-    const user = userCredential.user; // Puedes acceder a sus datos
-    console.log('Usuario autenticado', user.email);
-  })
-  .catch((error) => {
-    // Si hubo error (correo o contraseña incorrecta)
-    console.error('Error de login:', error.message);
-  });*/
-
-
-
-  /*login() {
-    // Simulación de validación (remplazar con lógica real)
-    if (this.username === 'usuario' && this.password === '1234') {
-
+      // Lógica de éxito:
       const activo = document.activeElement as HTMLElement | null;
       if (activo) activo.blur();
 
+      this.router.navigate(['/menu']);
+      console.log(res);
 
+    } catch (error: any) {
+      
+      //  Manejo de Errores de Firebase
+      
+      console.error("Error de autenticación capturado y manejado:", error);
 
+      let mensajeMostrar = 'Error al iniciar sesión';
 
-      this.router.navigateByUrl('/menu');
-    } else {
-      this.errorMessage = 'Usuario o contraseña incorrectos';
-      this.miservicio.mustramensaje(this.errorMessage);
+      if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+        // Unificamos los errores comunes de credenciales incorrectas
+        mensajeMostrar = 'Usuario o contraseña incorrectos.';
+      } else if (error.code === 'auth/invalid-email') {
+        mensajeMostrar = 'El formato del correo electrónico es incorrecto.';
+      } else {
+        mensajeMostrar = 'Error desconocido. Inténtelo de nuevo.';
+      }
+      
+      this.miservicio.mustramensaje(mensajeMostrar);
     }
-
+    
     this.limpiarFormulario();
+  }
 
 
-  }*/
 
-
-  /*const auth = getAuth();
-  signInWithEmailAndPassword(auth, this.username, this.password)
-    .then((userCredential) => {
-      // Login exitoso, redirigir a menú
-      this.router.navigateByUrl('/menu');
-      this.limpiarFormulario();
-    })
-    .catch((error) => {
-      // Error en credenciales
-      this.errorMessage = 'Usuario o contraseña incorrectos';
-      this.miservicio.mustramensaje(this.errorMessage);
-    });*/
 
 
 
 
   limpiarFormulario(){
-     this.username="";
+     this.correo="";
      this.password="";
      this.errorMessage="";
 
