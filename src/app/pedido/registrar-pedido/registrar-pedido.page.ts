@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-registrar-pedido',
@@ -8,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrarPedidoPage implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
+  }
+
+
+
+
+  volverMenu(){
+
+  const activo = document.activeElement as HTMLElement | null;
+    if (activo) {
+      activo.blur();
+    }
+
+    this.router.navigate(['/menu']);
+
+
+
   }
 
 }

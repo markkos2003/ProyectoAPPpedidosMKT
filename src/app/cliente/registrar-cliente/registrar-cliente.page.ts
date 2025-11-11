@@ -38,7 +38,7 @@ export class RegistrarClientePage implements OnInit {
   ngOnInit() {
   }
 
-  //registrarCliente(){}
+  
 
 
 
@@ -58,7 +58,7 @@ export class RegistrarClientePage implements OnInit {
 
         if (resultado.success) {
           // Éxito
-          await this.toast.mustramensaje('Cliente registrado exitosamente ✓');
+          await this.toast.mustramensaje('Cliente registrado exitosamente ');
           this.clienteForm.reset();
           
           // Opcional: navegar a otra página

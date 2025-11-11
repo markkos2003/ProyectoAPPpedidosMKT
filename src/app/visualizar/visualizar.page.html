@@ -1,9 +1,9 @@
-<ion-header [translucent]="true">
+<!--<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-button routerLink="/menu">
     <ion-icon slot="icon-only" name="arrow-back"></ion-icon> 
   </ion-button>
-    <ion-title>visualizar</ion-title>
+    <ion-title>ESTADO DE PEDIDOS</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -40,4 +40,229 @@
 
 
 
+</ion-content>-->
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>VISUALIZAR PEDIDOS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Barra de búsqueda -->
+  <ion-searchbar 
+    placeholder="Buscar por cliente o producto"
+    animated>
+  </ion-searchbar>
+
+  <!-- Filtros por estado -->
+  <div class="filtros-container">
+    <ion-button 
+      class="btn-proceso activo">
+      EN PROCESO
+    </ion-button>
+    
+    <ion-button 
+      class="btn-cancelado">
+      CANCELADO
+    </ion-button>
+    
+    <ion-button 
+      class="btn-recibido">
+      RECIBIDO
+    </ion-button>
+
+    <ion-button 
+      fill="outline">
+      TODOS
+    </ion-button>
+  </div>
+
+  <!-- Lista de pedidos de ejemplo -->
+  <ion-list>
+    <!-- Pedido 1: EN PROCESO -->
+    <ion-card class="pedido-card">
+      <ion-card-header>
+        <div class="pedido-header">
+          <div>
+            <ion-card-title>Jorge David Anciana</ion-card-title>
+            <ion-card-subtitle>
+              <ion-icon name="calendar-outline"></ion-icon>
+              12/11/2025 10:30
+            </ion-card-subtitle>
+          </div>
+          <ion-badge 
+            color="warning"
+            class="estado-badge">
+            EN PROCESO
+          </ion-badge>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <!-- Productos del pedido -->
+        <div class="productos-lista">
+          <div class="producto-item">
+            <ion-icon name="cube-outline"></ion-icon>
+            <span class="producto-nombre">Laptop Modelo X</span>
+            <span class="producto-cantidad">x1</span>
+            <span class="producto-precio">S/ 1500.00</span>
+          </div>
+          <div class="producto-item">
+            <ion-icon name="cube-outline"></ion-icon>
+            <span class="producto-nombre">Mouse Inalámbrico</span>
+            <span class="producto-cantidad">x2</span>
+            <span class="producto-precio">S/ 100.00</span>
+          </div>
+        </div>
+
+        <!-- Total -->
+        <div class="total-pedido">
+          <strong>Total: S/ 1600.00</strong>
+        </div>
+
+        <!-- Notas -->
+        <div class="notas">
+          <ion-icon name="document-text-outline"></ion-icon>
+          <span>Entrega urgente antes de las 5 PM.</span>
+        </div>
+
+        <!-- Acciones -->
+        <div class="acciones-pedido">
+          <ion-button 
+            size="small" 
+            fill="outline" 
+            color="warning">
+            <ion-icon slot="start" name="sync-outline"></ion-icon>
+            Cambiar Estado
+          </ion-button>
+
+          <ion-button 
+            size="small" 
+            fill="clear" 
+            color="danger">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Pedido 2: RECIBIDO -->
+    <ion-card class="pedido-card">
+      <ion-card-header>
+        <div class="pedido-header">
+          <div>
+            <ion-card-title>Ana María López</ion-card-title>
+            <ion-card-subtitle>
+              <ion-icon name="calendar-outline"></ion-icon>
+              10/11/2025 14:45
+            </ion-card-subtitle>
+          </div>
+          <ion-badge 
+            color="success"
+            class="estado-badge">
+            RECIBIDO
+          </ion-badge>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="productos-lista">
+          <div class="producto-item">
+            <ion-icon name="cube-outline"></ion-icon>
+            <span class="producto-nombre">Monitor 27" 4K</span>
+            <span class="producto-cantidad">x1</span>
+            <span class="producto-precio">S/ 2200.00</span>
+          </div>
+        </div>
+
+        <div class="total-pedido">
+          <strong>Total: S/ 2200.00</strong>
+        </div>
+
+        <div class="acciones-pedido">
+          <ion-button 
+            size="small" 
+            fill="outline" 
+            color="warning">
+            <ion-icon slot="start" name="sync-outline"></ion-icon>
+            Cambiar Estado
+          </ion-button>
+
+          <ion-button 
+            size="small" 
+            fill="clear" 
+            color="danger">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Pedido 3: CANCELADO -->
+    <ion-card class="pedido-card">
+      <ion-card-header>
+        <div class="pedido-header">
+          <div>
+            <ion-card-title>Roberto Carlos Díaz</ion-card-title>
+            <ion-card-subtitle>
+              <ion-icon name="calendar-outline"></ion-icon>
+              09/11/2025 18:00
+            </ion-card-subtitle>
+          </div>
+          <ion-badge 
+            color="danger"
+            class="estado-badge">
+            CANCELADO
+          </ion-badge>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="productos-lista">
+          <div class="producto-item">
+            <ion-icon name="cube-outline"></ion-icon>
+            <span class="producto-nombre">Silla Ergonómica</span>
+            <span class="producto-cantidad">x1</span>
+            <span class="producto-precio">S/ 550.00</span>
+          </div>
+        </div>
+
+        <div class="total-pedido">
+          <strong>Total: S/ 550.00</strong>
+        </div>
+
+        <div class="acciones-pedido">
+          <ion-button 
+            size="small" 
+            fill="outline" 
+            color="warning">
+            <ion-icon slot="start" name="sync-outline"></ion-icon>
+            Cambiar Estado
+          </ion-button>
+
+          <ion-button 
+            size="small" 
+            fill="clear" 
+            color="danger">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    
+    <!-- Mensaje cuando no hay pedidos (de ejemplo) -->
+    <!-- Quitaré el *ngIf y lo dejaré comentado para que se vea la estructura
+    <ion-card class="no-pedidos">
+      <ion-card-content>
+        <ion-icon name="document-outline" class="icono-grande"></ion-icon>
+        <p>No hay pedidos para mostrar</p>
+      </ion-card-content>
+    </ion-card>
+    -->
+  </ion-list>
 </ion-content>

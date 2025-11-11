@@ -26,4 +26,24 @@ export class ListarProductoPage implements OnInit {
 
 
   }
+
+
+
+
+
+  volverMenu(){
+
+  const activo = document.activeElement as HTMLElement | null;
+    if (activo) {
+      activo.blur();
+    }
+
+    this.router.navigate(['/menu']);
+
+
+
+  }
+
+
+
 }

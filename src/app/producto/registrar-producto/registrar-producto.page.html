@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-button routerLink="/listar-producto">
+    <ion-button (click)="volverMenu()">
     <ion-icon slot="icon-only" name="arrow-back"></ion-icon> 
   </ion-button>
     <ion-title>REGISTRAR PRODUCTO</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> 
+<!--<ion-content> 
     <form class="ion-padding">
         
         <ion-card>
@@ -82,4 +82,76 @@
         </ion-button>
 
     </form>
+</ion-content>-->
+
+
+<ion-content [fullscreen]="true">
+  <div class="form-container">
+    <form>
+
+      <div class="image-preview">
+        <!--<img src="placeholder.jpg" alt="Preview">-->
+        <ion-button fill="clear" color="danger">
+          <ion-icon name="close-circle"></ion-icon>
+        </ion-button>
+      </div>
+      
+
+      <ion-button expand="block" fill="outline" type="button">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        AGREGAR IMAGEN
+      </ion-button>
+
+      <input 
+        type="file" 
+        accept="image/*" 
+        style="display: none;">
+
+        <!--<input type="file" accept="image/png, image/jpeg">-->
+
+      <ion-item>
+        <ion-label position="floating">Nombre del Producto</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Precio</ion-label>
+        <ion-input 
+          type="number" 
+          min="0"
+          step="0.01">
+        </ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Talla</ion-label>
+        <ion-select placeholder="Seleccionar talla">
+          <ion-select-option value="s">S</ion-select-option>
+          <ion-select-option value="m">M</ion-select-option>
+          <ion-select-option value="l">L</ion-select-option>
+          <ion-select-option value="xl">XL</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Stock</ion-label>
+        <ion-input 
+          type="number" 
+          min="0">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-textarea rows="3"></ion-textarea>
+      </ion-item>
+
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        class="submit-btn">
+        GUARDAR PRODUCTO
+      </ion-button>
+    </form>
+  </div>
 </ion-content>

@@ -46,7 +46,7 @@ export class ListarClientePage implements OnInit {
   }
 
 
- // eliminarCliente(indice:number){}
+ 
 
 
 
@@ -63,32 +63,7 @@ export class ListarClientePage implements OnInit {
   }
 
 
-  /*async eliminarCliente(id: string) {
-    const alert = await this.alerta.create({
-      header: 'Confirmar Eliminación',
-      message: '¿Estás seguro de que deseas eliminar este cliente?',
-      // ... (botones de Cancelar y Eliminar) ...
-      handler: async () => {
-        const resultado = await this.based.eliminarCliente(id);
-
-        if (resultado.success) {
-          // Éxito: Eliminar y actualizar lista
-          await this.cargarClientes(); 
-          this.muestra.mustramensaje('Cliente eliminado correctamente.');
-
-        } else if (resultado.codigo === 'HAS_ORDERS') {
-          // 🛑 Manejo específico del bloqueo por pedidos
-          this.mostrarRestriccionAlert(resultado.error); 
-
-        } else {
-          // Manejo de otros errores
-          this.muestra.mustramensaje('Error al intentar eliminar el cliente.');
-        }
-      },
-    });
-
-    await alert.present();
-}*/
+  
 
 
 async eliminarCliente(id: string) {
@@ -112,7 +87,7 @@ async eliminarCliente(id: string) {
                         // 3. Fallo: El flujo salta aquí si el servicio lanza un error.
                         
                         if (error.codigo === 'HAS_ORDERS') {
-                            // 🔴 Manejo específico del bloqueo por pedidos
+                            //  Manejo específico del bloqueo por pedidos
                             this.mostrarRestriccionAlert(error.message); 
                         } else {
                             // Manejo de otros errores (ej: fallo de conexión, permisos)
@@ -129,14 +104,7 @@ async eliminarCliente(id: string) {
 }
 
 
-async actualizarCliente(){
 
-
-
-
-
-
-}
 
 
 async mostrarRestriccionAlert(mensaje: string) {
@@ -150,7 +118,15 @@ async mostrarRestriccionAlert(mensaje: string) {
 
 
 
+volverMenu(){
 
+  const activo = document.activeElement as HTMLElement | null;
+    if (activo) {
+      activo.blur();
+    }
+
+    this.router.navigate(['/menu']);
+}
 
 
 
