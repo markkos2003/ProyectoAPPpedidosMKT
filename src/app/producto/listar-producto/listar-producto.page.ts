@@ -10,6 +10,12 @@ import { Router} from '@angular/router';
 })
 export class ListarProductoPage implements OnInit {
 
+
+   producto:string[]=["polo","falda","casaca"];
+
+
+
+
   constructor(private router:Router) { }
 
   ngOnInit() {

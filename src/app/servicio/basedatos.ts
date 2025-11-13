@@ -18,6 +18,9 @@ import {
 
 
 
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -139,6 +142,37 @@ async obtenerClientePorId(id: string): Promise<any> {
         throw new Error('Cliente no encontrado.');
     }
 }
+
+
+
+
+
+//-------------------MODULO PRODUCTO----------------------------------------------------
+
+async guardarProducto(data: any): Promise<void> {
+    try {
+      // 2. Obtenemos una referencia a la colección 'usuarios'
+      const productoCollection = collection(this.conexion, 'productos');
+      
+      // 3. Añadimos el documento. Firebase le asignará un ID automático.
+      await addDoc(productoCollection, data);
+
+      console.log('Documento añadido a Firestore con éxito.');
+      
+    } catch (error) {
+      console.error('Error guardando los datos en Firestore:', error);
+      // Lanzamos el error para que el componente lo pueda manejar y avisar al usuario
+      throw new Error('Fallo al guardar los datos del usuario en la base de datos.');
+    }
+  }
+
+
+
+
+
+
+
+
 
 
 

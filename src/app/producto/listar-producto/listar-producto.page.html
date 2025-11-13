@@ -26,7 +26,7 @@
   </ion-fab>
 
 
-<ion-list>
+<!--<ion-list>
 
 
 <ion-item><ion-card>  prod1      </ion-card>   <ion-buttons slot="end">
@@ -55,7 +55,61 @@
 
 
 
-</ion-list>
+</ion-list>-->
+
+
+<ion-card    *ngFor="let produ of producto; let i=index"    >
+  <ion-card-header>
+    <ion-card-title>Card Title</ion-card-title>
+    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    Here's a small text description for the card content. Nothing more, nothing less.
+  </ion-card-content>
+
+  <ion-grid>
+
+   <ion-row>
+     <ion-col>
+        <ion-button 
+              expand="block" 
+              color="secondary" 
+               
+              
+            >
+              <ion-icon slot="start" name="create-outline"></ion-icon>
+              Actualizar
+            </ion-button>
+
+     </ion-col>
+
+     <ion-col>
+          <ion-button 
+              expand="block" 
+              color="danger" 
+              
+              
+            >
+              <ion-icon slot="start" name="trash-outline"></ion-icon>
+              Eliminar
+            </ion-button>
+
+      
+     </ion-col>
+
+
+
+
+   </ion-row>
+
+
+
+
+  </ion-grid>
+
+  
+</ion-card>
 
 
 

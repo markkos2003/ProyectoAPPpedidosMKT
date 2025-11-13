@@ -84,20 +84,50 @@
     </ion-note>
 
     <ion-item>
-      <ion-button 
-        type="submit" 
-        expand="block"
-        [disabled]="clienteForm.invalid">
+
+       <ion-grid>
+
+          <ion-row>
+
+           <ion-col>
+              <ion-button 
+                   type="submit" 
+                  expand="block"
+                  [disabled]="clienteForm.invalid">
         REGISTRAR
       </ion-button>
 
-      <ion-button 
+
+           </ion-col>
+
+           <ion-col>
+              <ion-button 
          
-        expand="block"
-        (click)="cancelar()"
-        >
-        CANCELAR
-      </ion-button>
+               expand="block"
+              (click)="cancelar()"
+               >
+                CANCELAR
+              </ion-button>
+
+            
+           </ion-col>
+
+
+
+          </ion-row>
+
+
+
+
+
+       </ion-grid>
+
+
+
+
+      
+
+      
     </ion-item>
 
   </form>

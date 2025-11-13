@@ -9,6 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { Mostrar } from './mostrar';
 import { environment } from 'src/environments/environment';
 import { Basedatos } from './servicio/basedatos';
+import { Servicioimagen } from './servicio/servicioimagen';
+import { Alertas } from './servicio/alertas';
+import { ReactiveFormsModule } from '@angular/forms';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 // ------------------ Importaciones Modulares de Firebase ------------------
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -24,6 +28,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     IonicModule.forRoot(), 
     AppRoutingModule,
     //  ELIMINADO: AngularFireModule.initializeApp(environment.firebaseConfig)
+    ReactiveFormsModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -37,7 +42,10 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     
     // Otros servicios
     Mostrar,
-    Basedatos 
+    Basedatos,
+    Servicioimagen,
+    Alertas ,
+    provideHttpClient()
   ],
   bootstrap: [AppComponent],
 })
