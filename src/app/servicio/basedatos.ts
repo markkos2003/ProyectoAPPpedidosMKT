@@ -167,7 +167,29 @@ async guardarProducto(data: any): Promise<void> {
   }
 
 
+  async obtenerProductos() {
+    try {
+      // 1. Obtener la referencia a la colección 'productos'
+      const productosRef = collection(this.conexion, 'productos');
 
+      // 2. Ejecutar la consulta para obtener todos los documentos
+      const querySnapshot = await getDocs(productosRef);
+
+      // 3. Mapear los documentos a un array de objetos productos
+      const productos = querySnapshot.docs.map(doc => {
+        return {
+          id: doc.id, // Incluir el ID del documento
+          ...doc.data() // Incluir todos los campos del documento
+        };
+      });
+
+      console.log('Productos obtenidos:', productos);
+      return { success: true, data: productos };
+    } catch (error) {
+      console.error('Error al obtener productos:', error);
+      return { success: false, error };
+    }
+  }
 
 
 

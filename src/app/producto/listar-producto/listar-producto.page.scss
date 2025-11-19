@@ -1,0 +1,11 @@
+.imagenproducto {
+    /* 1. Definir un tamaño fijo (ejemplo: 150px x 150px) */
+    width: 70px;
+    height: 70px; 
+    
+    /* 2. Propiedad CLAVE para el ajuste */
+    object-fit: contain;
+    
+    /* 3. (Opcional) Centrar la imagen si el tamaño original es diferente */
+    object-position: center; 
+}

@@ -58,18 +58,41 @@
 </ion-list>-->
 
 
-<ion-card    *ngFor="let produ of producto; let i=index"    >
+
+<ion-grid>
+<ion-row>
+<ion-col  size="12" size-md="6" size-lg="4" *ngFor="let produ of listaproductos; let i=index" >
+
+<ion-card        >
   <ion-card-header>
-    <ion-card-title>Card Title</ion-card-title>
-    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+    <ion-card-title>{{produ.nombre}}</ion-card-title>
+    <ion-card-subtitle>{{produ.descripcion}}</ion-card-subtitle>
   </ion-card-header>
 
   <ion-card-content>
-    Here's a small text description for the card content. Nothing more, nothing less.
+    
+    <ion-grid>
+       <ion-row>
+
+         <ion-col> <img [src]="produ.imagen_url" alt="Descripción de la imagen" class="imagenproducto">   
+          </ion-col>
+
+         <ion-col>          
+
+          
+
+
+
+         </ion-col>
+
+       </ion-row>
+
+
+
+    </ion-grid>
   </ion-card-content>
 
   <ion-grid>
-
    <ion-row>
      <ion-col>
         <ion-button 
@@ -97,19 +120,19 @@
 
       
      </ion-col>
-
-
-
-
    </ion-row>
-
-
-
-
   </ion-grid>
-
-  
+ 
 </ion-card>
+
+
+
+</ion-col>
+</ion-row>
+</ion-grid>
+
+
+
 
 
 

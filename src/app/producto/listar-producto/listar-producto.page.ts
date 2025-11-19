@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
+import { Basedatos } from 'src/app/servicio/basedatos';
+import { Alertas } from 'src/app/servicio/alertas';
 
 
 @Component({
@@ -13,10 +15,12 @@ export class ListarProductoPage implements OnInit {
 
    producto:string[]=["polo","falda","casaca"];
 
+   listaproductos:any[]=[];
 
 
-
-  constructor(private router:Router) { }
+  constructor(private router:Router,private based:Basedatos,private alerta:Alertas) {
+    this.cargarProductos();
+   }
 
   ngOnInit() {
   }
@@ -31,6 +35,20 @@ export class ListarProductoPage implements OnInit {
   this.router.navigate(['/registrar-producto']);
 
 
+  }
+
+
+  async cargarProductos() {
+    const resultado = await this.based.obtenerProductos();
+
+    if (resultado.success) {
+      this.listaproductos = resultado.data;
+      console.log('Datos cargados:', this.listaproductos);
+    } else {
+      console.error('No se pudieron cargar los productos:', resultado.error);
+      // Mostrar un mensaje de error al usuario
+    
+    }
   }
 
 
