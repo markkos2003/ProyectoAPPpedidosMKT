@@ -44,7 +44,7 @@ const routes: Routes = [
     loadChildren: () => import('./producto/registrar-producto/registrar-producto.module').then( m => m.RegistrarProductoPageModule)
   },
   {
-    path: 'actualizar-producto',
+    path: 'actualizar-producto/:id',
     loadChildren: () => import('./producto/actualizar-producto/actualizar-producto.module').then( m => m.ActualizarProductoPageModule)
   },
   {

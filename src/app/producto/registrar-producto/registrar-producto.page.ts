@@ -51,19 +51,19 @@ private basedato:Basedatos) {
 
 
    onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.selectedFile = file;
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.imagenPreviewUrl = e.target.result; // Para la previsualización
-      };
-      reader.readAsDataURL(file);
-    } else {
+ const file = event.target.files[0];
+  if (file) {
+ this.selectedFile = file;
+const reader = new FileReader();
+reader.onload = (e: any) => {
+ this.imagenPreviewUrl = e.target.result; // Para la previsualización
+};
+ reader.readAsDataURL(file);
+ } else {
         this.selectedFile = null;
         this.imagenPreviewUrl = '';
     }
-  }
+ }
   
 
   eliminarImagen() {

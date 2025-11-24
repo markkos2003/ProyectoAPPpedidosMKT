@@ -52,6 +52,18 @@ export class ListarProductoPage implements OnInit {
   }
 
 
+  editarProducto(id:string){
+
+  const activo = document.activeElement as HTMLElement | null;
+   if (activo) activo.blur();
+
+   console.log('estoy en esata parte si pude llegar aqui');
+   
+   this.router.navigate(['/actualizar-producto',id]);
+
+  }
+
+
 
 
 

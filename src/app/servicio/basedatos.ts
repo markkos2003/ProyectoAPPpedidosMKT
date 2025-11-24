@@ -193,9 +193,58 @@ async guardarProducto(data: any): Promise<void> {
 
 
 
+  async obtenerProductoPorId(id: string): Promise<any> {
+    const docRef = doc(this.conexion, 'productos', id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        return { id: docSnap.id, ...docSnap.data() }; // Devuelve los datos con el ID
+    } else {
+        // Lanza un error si no encuentra el cliente
+        throw new Error('Producto  no encontrado.');
+    }
+}
+
+
+async editarProducto(id: string, datosActualizados: any): Promise<void> {
+    try {
+        const clienteRef = doc(this.conexion, 'productos', id);
+
+        // Realiza la actualización del documento en Firestore
+        await updateDoc(clienteRef, datosActualizados);
+
+        // Si la promesa se resuelve, la función sale exitosamente (no devuelve nada)
+        
+    } catch (error) {
+        //  Lanza el error capturado para que sea manejado por el componente
+        console.error('Error en el servicio al actualizar producto:', error);
+        
+        // Podemos lanzar un nuevo error más descriptivo o el original
+        throw new Error('Fallo la actualización en la base de datos. Intente de nuevo.');
+    }
+}
 
 
 
+async eliminarProducto(clienteId: string) {
+    // 1. Verificar Referencias (Mantenemos la lógica de bloqueo)
+    const pedidosRef = collection(this.conexion, 'pedidos');
+    const q = query(pedidosRef, where('clienteId', '==', clienteId));
+    const pedidosSnapshot = await getDocs(q);
+
+    if (!pedidosSnapshot.empty) {
+        //  Lanzar un error con un código específico si hay pedidos
+        const error = new Error('Restricción de datos: El cliente tiene pedidos asociados.');
+        (error as any).codigo = 'HAS_ORDERS'; // Añadir una propiedad personalizada al error
+        throw error;
+    }
+
+    // 2. Eliminar
+    const docRef = doc(this.conexion, 'clientes', clienteId);
+    await deleteDoc(docRef);
+
+    // Si llega aquí, la eliminación fue exitosa (no necesitamos devolver nada)
+}
 
 
 

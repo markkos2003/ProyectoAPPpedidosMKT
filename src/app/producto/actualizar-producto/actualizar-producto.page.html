@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>actualizar-producto</ion-title>
+    <ion-title>ACTUALIZAR PRODUCTO</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,4 +10,176 @@
       <ion-title size="large">actualizar-producto</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  
+  <div class="form-container">
+    <form [formGroup]="productoForm" (ngSubmit)="actualizarProducto()">
+      
+      <!-- ✅ Muestra imagen existente O previsualización de nueva -->
+      <div class="image-preview" *ngIf="imagenPreviewUrl || productoActual?.imagenUrl">
+        <img [src]="imagenPreviewUrl || productoActual?.imagen_url" alt="Imagen del Producto"> 
+        <ion-button fill="clear" color="danger" (click)="eliminarImagen()">
+          <ion-icon name="close-circle"></ion-icon>
+        </ion-button>
+      </div>
+
+      <!-- ✅ Botón para cambiar imagen -->
+      <ion-button expand="block" fill="outline" (click)="seleccionarImagen()" type="button">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        {{ (imagenPreviewUrl || productoActual?.imagen_url) ? 'CAMBIAR IMAGEN' : 'AGREGAR IMAGEN' }}
+      </ion-button>
+
+      <input 
+        type="file" 
+        #fileInput 
+        id="file-input-producto"
+        accept="image/*" 
+        (change)="onFileSelected($event)" 
+        style="display: none;">
+
+      <!-- ... resto de tus campos ... -->
+
+      <ion-item>
+        <ion-label position="floating">Nombre del Producto *</ion-label>
+        <ion-input 
+          id="nombre-producto"
+          type="text" 
+          formControlName="nombre" 
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">SKU / Código Modelo *</ion-label>
+        <ion-input 
+          id="sku-producto"
+          type="text" 
+          formControlName="sku" 
+          required>
+        </ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Género *</ion-label>
+        <ion-select 
+          id="genero-producto"
+          formControlName="genero" 
+          required 
+          interface="popover">
+          <ion-select-option value="Unisex">Unisex</ion-select-option>
+          <ion-select-option value="Varon">Varón</ion-select-option>
+          <ion-select-option value="Mujer">Mujer</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Precio *</ion-label>
+        <ion-input 
+          id="precio-producto"
+          type="number" 
+          formControlName="precio" 
+          min="0.01"
+          step="0.01"
+          required>
+        </ion-input>
+      </ion-item>
+      
+      <ion-list-header lines="inset">
+        <ion-label>STOCK POR TALLA (Cantidades)</ion-label>
+      </ion-list-header>
+      
+      <ion-item>
+        <ion-label>Talla S</ion-label>
+        <ion-input 
+          id="stock-s"
+          type="number" 
+          formControlName="stock_s" 
+          min="0" 
+          placeholder="0" 
+          required>
+        </ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Talla M</ion-label>
+        <ion-input 
+          id="stock-m"
+          type="number" 
+          formControlName="stock_m" 
+          min="0" 
+          placeholder="0" 
+          required>
+        </ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Talla L</ion-label>
+        <ion-input 
+          id="stock-l"
+          type="number" 
+          formControlName="stock_l" 
+          min="0" 
+          placeholder="0" 
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-textarea 
+          id="descripcion-producto"
+          formControlName="descripcion" 
+          rows="3">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-grid>
+
+         <ion-row>
+
+          <ion-col>
+             <!-- ✅ Cambio en validación: permite actualizar sin cambiar imagen -->
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        class="submit-btn"
+        [disabled]="productoForm.invalid || isLoading"
+        >
+        {{ isLoading ? 'ACTUALIZANDO...' : 'ACTUALIZAR PRODUCTO' }}
+      </ion-button>
+
+          </ion-col>
+
+          <ion-col>
+           <ion-button (click)="cancelar()">
+             CANCELAR
+               
+
+           </ion-button>
+          </ion-col>
+
+
+
+
+         </ion-row>
+
+
+      </ion-grid>
+
+      
+    </form>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </ion-content>

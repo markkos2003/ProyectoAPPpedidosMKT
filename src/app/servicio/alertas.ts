@@ -58,6 +58,28 @@ async dialogoConfirmacion(mensaje: string, titulo: string = 'Confirmar'): Promis
   });
 }
 
+//opcional
+async mostrarConfirmacion(titulo: string, mensaje: string): Promise<boolean> {
+  return new Promise(async (resolve) => {
+    const alert = await this.dialogos.create({
+      header: titulo,
+      message: mensaje,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => resolve(false)
+        },
+        {
+          text: 'Continuar',
+          handler: () => resolve(true)
+        }
+      ]
+    });
+    await alert.present();
+  });
+}
+
  async dialogoPrompt(mensaje: string, titulo: string = 'Ingresar Valor', placeholder: string = ''): Promise<string | null> {
   return new Promise(async (resolve) => {
     const alert = await this.dialogos.create({
@@ -124,6 +146,7 @@ async mostrarCarga(mensaje: string = 'Cargando...'): Promise<void> {
 
 
 async ocultarCarga(): Promise<void> {
+  console.log('se llego a ocultar la carga');
   if (this.loadingElement) {
     await this.loadingElement.dismiss();
     this.loadingElement = undefined;
