@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { Basedatos } from 'src/app/servicio/basedatos';
 import { Alertas } from 'src/app/servicio/alertas';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -18,7 +19,10 @@ export class ListarProductoPage implements OnInit {
    listaproductos:any[]=[];
 
 
-  constructor(private router:Router,private based:Basedatos,private alerta:Alertas) {
+  constructor(private router:Router,
+    private based:Basedatos,
+    private alerta:Alertas,
+    private alertaeliminar:AlertController) {
     this.cargarProductos();
    }
 
@@ -60,6 +64,46 @@ export class ListarProductoPage implements OnInit {
    console.log('estoy en esata parte si pude llegar aqui');
    
    this.router.navigate(['/actualizar-producto',id]);
+
+  }
+
+  async eliminarProducto(id:string){
+    
+    const alerti=await this.alertaeliminar.create({
+
+     header: 'Confirmar eliminación',
+     message:`¿Estás seguro que deseas eliminar este producto?`,
+     buttons:[
+      {text:'CANCELAR', role:'cancel' },
+      {text:'ELIMINAR',  
+       handler: async()=>{
+          try{
+           await this.based.eliminarProducto(id) ;
+
+           await this.cargarProductos();
+           this.alerta.mostrarMensaje('Producto eliminado correctamente');
+
+          }catch(error:any){
+
+           if(error.codigo==='HAS_ORDERS'){
+            
+            this.alerta.mostrarDialogo(error.message,'Eliminación bloqueada');
+
+           }else{
+
+             console.log('Error al intentar eliminar: ',error);
+             this.alerta.mostrarMensaje('Error al intentar eliminar el producto.');
+                     }
+                     }
+       },
+       },
+     ],
+    },
+            );
+
+   await alerti.present();
+
+
 
   }
 

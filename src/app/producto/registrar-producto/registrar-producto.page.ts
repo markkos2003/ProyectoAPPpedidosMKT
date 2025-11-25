@@ -105,7 +105,7 @@ reader.onload = (e: any) => {
     async registrarProducto() {
     // Validación principal
     if (this.productoForm.invalid || !this.selectedFile) {
-      await this.alerta.mostrarDialogo('Error', 'Completa los campos obligatorios y selecciona una imagen.');
+      await this.alerta.mostrarMensaje( 'Completa los campos obligatorios y selecciona una imagen.');
       return;
     }
     
@@ -114,7 +114,8 @@ reader.onload = (e: any) => {
     
     try {
         // 1. Subida a Cloudinary
-        await this.alerta.mostrarDialogo('Procesando', 'Subiendo imagen...');
+        //await this.alerta.mostrarDialogo('Procesando', 'Subiendo imagen...');
+        console.log('subiendo imagen en el page registrar');
         finalImageUrl = await this.servicioimag.subirImagen(this.selectedFile as File);
 
         // 2. Construir el objeto final con el mapa de stock
@@ -139,12 +140,12 @@ reader.onload = (e: any) => {
         // 3. Guardar en Firestore
         await this.basedato.guardarProducto(productoParaGuardar); // Tu servicio debe manejar el addDoc a Firestore
       
-        await this.alerta.mostrarDialogo('Éxito', 'Producto registrado correctamente');
+        await this.alerta.mostrarMensaje( 'Producto registrado correctamente');
         this.limpiarFormulario();
         this.router.navigate(['/listar-producto']);
     } catch (error) {
         console.error("Error completo:", error);
-        await this.alerta.mostrarDialogo('Error', 'No se pudo registrar el producto.');
+        await this.alerta.mostrarMensaje('No se pudo registrar el producto.');
     } finally {
         this.isLoading = false;
     }

@@ -226,21 +226,21 @@ async editarProducto(id: string, datosActualizados: any): Promise<void> {
 
 
 
-async eliminarProducto(clienteId: string) {
+async eliminarProducto(productoId: string) {
     // 1. Verificar Referencias (Mantenemos la lógica de bloqueo)
     const pedidosRef = collection(this.conexion, 'pedidos');
-    const q = query(pedidosRef, where('clienteId', '==', clienteId));
+    const q = query(pedidosRef, where('productoId', '==', productoId));
     const pedidosSnapshot = await getDocs(q);
 
     if (!pedidosSnapshot.empty) {
         //  Lanzar un error con un código específico si hay pedidos
-        const error = new Error('Restricción de datos: El cliente tiene pedidos asociados.');
+        const error = new Error('Restricción de datos: El producto tiene pedidos asociados.');
         (error as any).codigo = 'HAS_ORDERS'; // Añadir una propiedad personalizada al error
         throw error;
     }
 
     // 2. Eliminar
-    const docRef = doc(this.conexion, 'clientes', clienteId);
+    const docRef = doc(this.conexion, 'productos', productoId);
     await deleteDoc(docRef);
 
     // Si llega aquí, la eliminación fue exitosa (no necesitamos devolver nada)
