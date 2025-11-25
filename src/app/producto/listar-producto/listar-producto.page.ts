@@ -23,13 +23,15 @@ export class ListarProductoPage implements OnInit {
     private based:Basedatos,
     private alerta:Alertas,
     private alertaeliminar:AlertController) {
-    this.cargarProductos();
+    //this.cargarProductos();
    }
 
   ngOnInit() {
   }
 
-
+ionViewWillEnter() {
+  this.cargarProductos(); // Se ejecuta cada vez que entras a la vista
+}
 
   registrarproducto(){
 

@@ -21,8 +21,13 @@ export class ListarClientePage implements OnInit {
   ) { }
 
   ngOnInit():void {
-    this.cargarClientes();
+    //this.cargarClientes();
   }
+
+
+  ionViewWillEnter() {
+  this.cargarClientes(); // Se ejecuta cada vez que entras a la vista
+}
 
 
   IrregistrarCliente(){
