@@ -1,0 +1,122 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button (click)='volverMenu()'>
+    <ion-icon slot="icon-only" name="arrow-back"></ion-icon> 
+  </ion-button>
+    <ion-title>REGISTRAR PEDIDO</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">registrar-pedido</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="form-container">
+    <!-- Removed (ngSubmit)="registrarPedido()" -->
+    <form>
+
+      <!-- Seleccionar Cliente -->
+      <ion-item>
+        <ion-label position="floating">Seleccionar Cliente *</ion-label>
+        <ion-select
+          name="clienteId"
+          interface="alert"
+          required>
+          <!-- Placeholder Option - Removed *ngFor -->
+          <ion-select-option   *ngFor="let clien of listaclientes" [value]="clien.id">{{clien.nombre}}</ion-select-option>
+          <!--<ion-select-option value="2">Cliente B</ion-select-option>-->
+        </ion-select>
+      </ion-item>
+
+      <!-- Lista de productos agregados (Static placeholder - Removed *ngIf) -->
+      <div class="productos-section"  >
+        <h3>Productos Agregados</h3>
+        <!-- Placeholder Card - Removed *ngFor -->
+        <ion-card class="producto-card">
+          <ion-card-content>
+            <div class="producto-info">
+              <div class="producto-detalle">
+                <strong>Producto de Ejemplo</strong>
+                <p>S/ 15.00 x 2</p>
+                <p class="subtotal">Subtotal: S/ 30.00</p>
+              </div>
+              <!-- Removed (click)="eliminarItem(i)" -->
+              <ion-button fill="clear" color="danger">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <!-- Agregar Producto -->
+      <div class="agregar-producto-section">
+        <h3>Agregar Producto</h3>
+
+        <ion-item>
+          <ion-label position="floating">Producto</ion-label>
+          <ion-select
+            name="producto"
+            interface="alert">
+            <!-- Placeholder Options - Removed *ngFor -->
+            <ion-select-option 
+             *ngFor="let produ of listaproductos">{{produ.nombre}}-S/{{produ.precio}}</ion-select-option>
+            <!--<ion-select-option value="prod2">Item 2 - S/ 25.00</ion-select-option>-->
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Cantidad</ion-label>
+          <ion-input
+            type="number"
+            name="cantidad"
+            min="1">
+            <!-- Removed [max] and [(ngModel)] -->
+          </ion-input>
+        </ion-item>
+
+        <!-- Removed (click) and [disabled] -->
+        <ion-button
+          expand="block"
+          fill="outline">
+          <ion-icon slot="start" name="add-circle"></ion-icon>
+          Agregar Producto
+        </ion-button>
+      </div>
+
+      <!-- Total (Static placeholder - Removed *ngIf) -->
+      <div class="total-section">
+        <h2>Total: S/ 150.00</h2>
+      </div>
+
+      <!-- Notas -->
+      <ion-item>
+        <ion-label position="floating">Notas (Opcional)</ion-label>
+        <ion-textarea
+          name="notas"
+          rows="3">
+          <!-- Removed [(ngModel)] -->
+        </ion-textarea>
+      </ion-item>
+
+      <!-- Removed [disabled] -->
+      <ion-button
+        expand="block"
+        type="submit"
+        class="submit-btn">
+        REGISTRAR PEDIDO
+      </ion-button>
+    </form>
+  </div>
+
+
+
+
+
+
+
+
+</ion-content>

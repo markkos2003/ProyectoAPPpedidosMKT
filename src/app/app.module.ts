@@ -7,17 +7,46 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { Mostrar } from './mostrar';
-
-
-//------------------integracion con firebase
-import {AngularFireModule} from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { Basedatos } from './servicio/basedatos';
+import { Servicioimagen } from './servicio/servicioimagen';
+import { Alertas } from './servicio/alertas';
+import { ReactiveFormsModule } from '@angular/forms';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+
+// ------------------ Importaciones Modulares de Firebase ------------------
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+//  provider modular para que el servicio Basedatos pueda inyectar 'Auth'
+import { provideAuth, getAuth } from '@angular/fire/auth'; 
+
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(environment.firebaseConfig)],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },Mostrar,Basedatos],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,
+    //  ELIMINADO: AngularFireModule.initializeApp(environment.firebaseConfig)
+    ReactiveFormsModule
+  ],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    
+    //  Inicializa la app de Firebase
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    
+    //  Provee los servicios modulares 
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()), //   Necesario para inyectar 'Auth' en Basedatos
+    
+    // Otros servicios
+    Mostrar,
+    Basedatos,
+    Servicioimagen,
+    Alertas ,
+    provideHttpClient()
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

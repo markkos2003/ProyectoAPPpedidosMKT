@@ -36,7 +36,7 @@ export class MenuPage implements OnInit {
       const activo = document.activeElement as HTMLElement | null;
       if (activo) activo.blur();
 
-    this.router.navigate(['/producto/listar-producto']);
+    this.router.navigate(['/pedido/registrar-pedido']);
 
   }
 

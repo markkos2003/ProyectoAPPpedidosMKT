@@ -1,0 +1,68 @@
+ion-content {
+  --background: #f6f8fc;
+}
+
+ion-toolbar {
+  --background: #1976d2;
+  --color: #fff;
+  font-weight: 500;
+}
+
+ion-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
+}
+
+ion-list {
+  margin-top: 12px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px 0 rgba(40, 60, 100, 0.09);
+  padding-bottom: 16px;
+}
+
+ion-item {
+  margin: 0 10px 8px 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px 0 rgba(36, 45, 78, 0.08);
+  background: #f9fafb;
+}
+
+ion-item .item-inner {
+  padding-right: 70px;
+}
+
+ion-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+ion-button[color="primary"] {
+  --background: #1976d2;
+  --color: #fff;
+}
+ion-button[color="danger"] {
+  --background: #ff1744;
+  --color: #fff;
+}
+
+/* FAB Style */
+ion-fab-button {
+  --background: #43a047;
+  --color: #fff;
+  box-shadow: 0 2px 10px 0 rgba(67,160,71,0.19);
+}
+
+/* Icon size tweaks for clarity */
+ion-icon {
+  font-size: 1.4em;
+}
+
+/* Infinite Scroll Content Style */
+ion-infinite-scroll-content {
+  display: flex;
+  justify-content: center;
+  font-size: 1.1em;
+  color: #1976d2;
+  font-family: 'Montserrat', sans-serif;
+}

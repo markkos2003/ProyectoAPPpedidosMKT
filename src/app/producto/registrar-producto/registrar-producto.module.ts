@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import {  ReactiveFormsModule } from '@angular/forms';
 
 import { RegistrarProductoPageRoutingModule } from './registrar-producto-routing.module';
 
@@ -13,7 +14,8 @@ import { RegistrarProductoPage } from './registrar-producto.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RegistrarProductoPageRoutingModule
+    RegistrarProductoPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [RegistrarProductoPage]
 })

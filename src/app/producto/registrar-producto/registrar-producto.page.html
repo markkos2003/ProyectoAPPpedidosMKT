@@ -1,56 +1,297 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>registrar-producto</ion-title>
+    <ion-button (click)="volverMenu()">
+    <ion-icon slot="icon-only" name="arrow-back"></ion-icon> 
+  </ion-button>
+    <ion-title>REGISTRAR PRODUCTO</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!--<ion-content> 
+    <form class="ion-padding">
+        
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Información General</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                
+                <ion-item>
+                    <ion-input label="Nombre del Producto" labelPlacement="floating" type="text"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-textarea label="Descripción (Opcional)" labelPlacement="floating" rows="3"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input label="Precio de Venta ($)" labelPlacement="floating" type="number"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="stacked">Seleccionar Imagen (JPG/PNG)</ion-label>
+                    <input type="file" accept="image/png, image/jpeg">
+                </ion-item>
+                
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card class="ion-margin-top">
+            <ion-card-header>
+                <ion-card-title>Inventario por Talla</ion-card-title>
+                <ion-button size="small" fill="solid" slot="end" color="success">
+                    + Añadir
+                </ion-button>
+            </ion-card-header>
+
+            <ion-card-content>
+                
+                <ion-row class="ion-align-items-center ion-margin-bottom">
+                    
+                    <ion-col size="5">
+                        <ion-item lines="full">
+                            <ion-select label="Talla" labelPlacement="stacked" placeholder="Selecciona">
+                                <ion-select-option value="S">S</ion-select-option>
+                                <ion-select-option value="M">M</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                    
+                    <ion-col size="5">
+                        <ion-item lines="full">
+                            <ion-input label="Stock" labelPlacement="stacked" type="number" min="0"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    
+                    <ion-col size="2" class="ion-text-center">
+                        <ion-button fill="clear" color="danger" size="small">
+                            X
+                        </ion-button>
+                    </ion-col>
+                
+                </ion-row>
+                </ion-card-content>
+        </ion-card>
+
+        <ion-button expand="block" type="submit" class="ion-margin-top">
+            Registrar Producto
+        </ion-button>
+        
+        <ion-button expand="block" fill="outline" color="medium" class="ion-margin-top">
+            Salir
+        </ion-button>
+
+    </form>
+</ion-content>-->
+
+
+
+<!--separacion de soluciones xd-->
+
+
+<!--<ion-content [fullscreen]="true">
+  <div class="form-container">
+    <form>
+
+      <div class="image-preview">
+        <img src="placeholder.jpg" alt="Preview">
+        <ion-button fill="clear" color="danger">
+          <ion-icon name="close-circle"></ion-icon>
+        </ion-button>
+      </div>
+      
+
+      <ion-button expand="block" fill="outline" type="button">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        AGREGAR IMAGEN
+      </ion-button>
+
+      <input 
+        type="file" 
+        accept="image/*" 
+        style="display: none;">-->
+
+        <!--<input type="file" accept="image/png, image/jpeg">-->
+
+      <!--<ion-item>
+        <ion-label position="floating">Nombre del Producto</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Precio</ion-label>
+        <ion-input 
+          type="number" 
+          min="0"
+          step="0.01">
+        </ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Talla</ion-label>
+        <ion-select placeholder="Seleccionar talla">
+          <ion-select-option value="s">S</ion-select-option>
+          <ion-select-option value="m">M</ion-select-option>
+          <ion-select-option value="l">L</ion-select-option>
+          <ion-select-option value="xl">XL</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Stock</ion-label>
+        <ion-input 
+          type="number" 
+          min="0">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-textarea rows="3"></ion-textarea>
+      </ion-item>
+
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        class="submit-btn">
+        GUARDAR PRODUCTO
+      </ion-button>
+    </form>
+  </div>
+</ion-content>-->
+
+<!-- ootrrrra opcion-->
+
+
+
+
+
+
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registrar-producto</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="form-container">
+    <form [formGroup]="productoForm" (ngSubmit)="registrarProducto()">
+      
+      <div class="image-preview" *ngIf="imagenPreviewUrl">
+        <img [src]="imagenPreviewUrl" alt="Previsualización de Imagen"> 
+        <ion-button fill="clear" color="danger" (click)="eliminarImagen()">
+          <ion-icon name="close-circle"></ion-icon>
+        </ion-button>
+      </div>
 
-<form>
+      <ion-button expand="block" fill="outline" (click)="seleccionarImagen()" type="button">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        {{ selectedFile ? 'CAMBIAR IMAGEN' : 'AGREGAR IMAGEN' }}
+      </ion-button>
 
-<ion-list>
+      <input 
+        type="file" 
+        #fileInput 
+        id="file-input-producto"
+        accept="image/*" 
+        (change)="onFileSelected($event)" 
+        style="display: none;">
 
-<ion-item><ion-input type="text" placeholder="nombre"></ion-input></ion-item>
-<ion-item>
-  <ion-select>
+      <ion-item>
+        <ion-label position="floating">Nombre del Producto *</ion-label>
+        <ion-input 
+          id="nombre-producto"
+          type="text" 
+          formControlName="nombre" 
+          required>
+        </ion-input>
+      </ion-item>
 
-<ion-select-option>S</ion-select-option>
-<ion-select-option>L</ion-select-option>
-<ion-select-option>XL</ion-select-option>
+      <ion-item>
+        <ion-label position="floating">SKU / Código Modelo *</ion-label>
+        <ion-input 
+          id="sku-producto"
+          type="text" 
+          formControlName="sku" 
+          required>
+        </ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Género *</ion-label>
+        <ion-select 
+          id="genero-producto"
+          formControlName="genero" 
+          required 
+          interface="popover">
+          <ion-select-option value="Unisex">Unisex</ion-select-option>
+          <ion-select-option value="Varon">Varón</ion-select-option>
+          <ion-select-option value="Mujer">Mujer</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-</ion-select>
-</ion-item>
+      <ion-item>
+        <ion-label position="floating">Precio *</ion-label>
+        <ion-input 
+          id="precio-producto"
+          type="number" 
+          formControlName="precio" 
+          min="0.01"
+          step="0.01"
+          required>
+        </ion-input>
+      </ion-item>
+      
+      <ion-list-header lines="inset">
+        <ion-label>STOCK POR TALLA (Cantidades)</ion-label>
+      </ion-list-header>
+      
+      <ion-item>
+        <ion-label>Talla S</ion-label>
+        <ion-input 
+          id="stock-s"
+          type="number" 
+          formControlName="stock_s" 
+          min="0" 
+          placeholder="0" 
+          required>
+        </ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Talla M</ion-label>
+        <ion-input 
+          id="stock-m"
+          type="number" 
+          formControlName="stock_m" 
+          min="0" 
+          placeholder="0" 
+          required>
+        </ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Talla L</ion-label>
+        <ion-input 
+          id="stock-l"
+          type="number" 
+          formControlName="stock_l" 
+          min="0" 
+          placeholder="0" 
+          required>
+        </ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-textarea 
+          id="descripcion-producto"
+          formControlName="descripcion" 
+          rows="3">
+        </ion-textarea>
+      </ion-item>
 
-
-
-
-</ion-list>
-
-
-
-
-
-
-
-
-
-
-
-
-</form>
-
-
-
-
-
-
-
-
-
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        class="submit-btn"
+        [disabled]="productoForm.invalid || !selectedFile || isLoading">
+        {{ isLoading ? 'GUARDANDO...' : 'GUARDAR PRODUCTO' }}
+      </ion-button>
+    </form>
+  </div>
 </ion-content>

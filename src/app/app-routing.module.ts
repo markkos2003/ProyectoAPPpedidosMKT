@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./cliente/registrar-cliente/registrar-cliente.module').then( m => m.RegistrarClientePageModule)
   },
   {
-    path: 'actualizar-cliente',
+    path: 'actualizar-cliente/:id',
     loadChildren: () => import('./cliente/actualizar-cliente/actualizar-cliente.module').then( m => m.ActualizarClientePageModule)
   },
   {
@@ -44,7 +44,7 @@ const routes: Routes = [
     loadChildren: () => import('./producto/registrar-producto/registrar-producto.module').then( m => m.RegistrarProductoPageModule)
   },
   {
-    path: 'actualizar-producto',
+    path: 'actualizar-producto/:id',
     loadChildren: () => import('./producto/actualizar-producto/actualizar-producto.module').then( m => m.ActualizarProductoPageModule)
   },
   {
@@ -54,6 +54,14 @@ const routes: Routes = [
   {
     path: 'visualizar',
     loadChildren: () => import('./visualizar/visualizar.module').then( m => m.VisualizarPageModule)
+  },
+  {
+    path: 'registrar-pedido',
+    loadChildren: () => import('./pedido/registrar-pedido/registrar-pedido.module').then( m => m.RegistrarPedidoPageModule)
+  },
+  {
+    path: 'pedido',
+    loadChildren: () => import('./pedido/pedido-module').then( m => m.PedidoModule)
   },
   
 
