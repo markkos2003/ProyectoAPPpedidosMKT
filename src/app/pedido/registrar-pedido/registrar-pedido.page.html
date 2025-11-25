@@ -26,13 +26,13 @@
           interface="alert"
           required>
           <!-- Placeholder Option - Removed *ngFor -->
-          <ion-select-option value="1">Cliente A</ion-select-option>
-          <ion-select-option value="2">Cliente B</ion-select-option>
+          <ion-select-option   *ngFor="let clien of listaclientes" [value]="clien.id">{{clien.nombre}}</ion-select-option>
+          <!--<ion-select-option value="2">Cliente B</ion-select-option>-->
         </ion-select>
       </ion-item>
 
       <!-- Lista de productos agregados (Static placeholder - Removed *ngIf) -->
-      <div class="productos-section">
+      <div class="productos-section"  >
         <h3>Productos Agregados</h3>
         <!-- Placeholder Card - Removed *ngFor -->
         <ion-card class="producto-card">
@@ -62,8 +62,9 @@
             name="producto"
             interface="alert">
             <!-- Placeholder Options - Removed *ngFor -->
-            <ion-select-option value="prod1">Item 1 - S/ 10.50</ion-select-option>
-            <ion-select-option value="prod2">Item 2 - S/ 25.00</ion-select-option>
+            <ion-select-option 
+             *ngFor="let produ of listaproductos">{{produ.nombre}}-S/{{produ.precio}}</ion-select-option>
+            <!--<ion-select-option value="prod2">Item 2 - S/ 25.00</ion-select-option>-->
           </ion-select>
         </ion-item>
 
