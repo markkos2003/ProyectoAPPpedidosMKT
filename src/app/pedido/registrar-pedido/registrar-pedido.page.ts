@@ -10,6 +10,11 @@ import { Router} from '@angular/router';
 })
 export class RegistrarPedidoPage implements OnInit {
 
+  //clientes: Cliente[] = [];
+  //productos: Producto[] = [];
+  //productoSeleccionado: Producto | null = null;
+  cantidad: number = 1;
+
   constructor(private router:Router) { }
 
   ngOnInit() {
