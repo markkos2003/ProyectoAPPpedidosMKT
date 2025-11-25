@@ -149,7 +149,29 @@ if(this.productoForm.valid && this.productoid){
 
 this.alerta.mostrarCarga('Guardando datos');
 let finalImageUrl: string = '';
-let datosactualizados={...this.productoForm.value}
+const valoresformulario=this.productoForm.value;
+//let datosactualizados={...this.productoForm.value}
+let datosactualizados:any={
+
+nombre:valoresformulario.nombre,
+sku:valoresformulario.sku,
+genero:valoresformulario.genero,
+precio:valoresformulario.precio,
+descripcion:valoresformulario.descripcion,
+imagen_url:this.imagenactual,
+stock_por_talla:{
+S:valoresformulario.stock_s,
+M:valoresformulario.stock_m,
+L:valoresformulario.stock_l
+
+
+}
+
+
+
+
+
+};
 
 try{
 
@@ -170,7 +192,7 @@ datosactualizados.imagen_url=this.imagenactual;
 
 await this.base.editarProducto(this.productoid,datosactualizados);
 
-await this.alerta.mostrarDialogo('Producto actualizado exitosamente ');
+await this.alerta.mostrarMensaje('Producto actualizado exitosamente ');
 
 const activo=document.activeElement as HTMLElement | null;
 if(activo)activo.blur();
