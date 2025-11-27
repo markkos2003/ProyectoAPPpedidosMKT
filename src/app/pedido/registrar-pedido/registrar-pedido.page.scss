@@ -1,4 +1,4 @@
-ion-header {
+/*ion-header {
   ion-toolbar {
     --background: #8B5CF6;
     --color: white;
@@ -146,4 +146,27 @@ ion-button {
   .total-section h2 {
     font-size: 20px;
   }
+}*/
+
+
+.listahorizontal{
+display: flex;
+flex-direction: row;
+overflow-x: auto;
+padding: 10px;
+gap:15px;
+scroll-behavior: smooth;
+
+.cardhorizontal{
+
+flex:0 0 140px;
+border:1px solid #e0e0e0;
+border-radius: 12px;
+padding:10px;
+text-align:center;
+transition: transform 0.1s;
+
+}
+
+
 }

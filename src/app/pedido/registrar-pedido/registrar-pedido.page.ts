@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
+import { Alertas } from 'src/app/servicio/alertas';
 import { Basedatos } from 'src/app/servicio/basedatos';
 
 
@@ -16,9 +17,17 @@ export class RegistrarPedidoPage implements OnInit {
   productosseleccionados: any[] = [];
   //productoSeleccionado: Producto | null = null;
   cantidad: number = 1;
+  productoTemporal: any=null;
+  modalAbierto:boolean=false;
+  seleccionTemporal={ S:0,M:0,L:0};
+  
+
+
+
 
   constructor(private router:Router,
-    private base:Basedatos) { }
+    private base:Basedatos,
+    private alerta:Alertas) { }
 
   ngOnInit() {
     this.cargarDatos();
@@ -49,6 +58,26 @@ export class RegistrarPedidoPage implements OnInit {
 
   }
   
+  }
+
+
+
+  abrirModal(producto:any){
+
+    this.productoTemporal=producto;
+    this.modalAbierto=true;
+
+
+     //this.alerta.mostrarDialogo("hola funciona esto");
+
+
+  }
+
+  cerrarModal(){
+
+    this.modalAbierto=false;
+    this.productoTemporal=null;
+
   }
 
 
