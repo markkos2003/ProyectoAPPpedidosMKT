@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PedidoRoutingModule } from './pedido-routing-module';
 
@@ -8,7 +9,9 @@ import { PedidoRoutingModule } from './pedido-routing-module';
   declarations: [],
   imports: [
     CommonModule,
-    PedidoRoutingModule
+    PedidoRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PedidoModule { }

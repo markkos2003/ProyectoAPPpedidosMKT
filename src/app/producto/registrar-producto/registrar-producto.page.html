@@ -225,6 +225,21 @@
       </ion-item>
 
       <ion-item>
+        <ion-label>Tipo *</ion-label>
+        <ion-select 
+          id="tipo-producto"
+          formControlName="tipo" 
+          required 
+          interface="popover">
+          <ion-select-option >Camisas y blusas</ion-select-option>
+          <ion-select-option >Pantalones y faldas</ion-select-option>
+          <ion-select-option >Polos y camisetas</ion-select-option>
+          <ion-select-option >Sudaderas y abrigos</ion-select-option>
+          <ion-select-option >vestidos</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
         <ion-label position="floating">Precio *</ion-label>
         <ion-input 
           id="precio-producto"

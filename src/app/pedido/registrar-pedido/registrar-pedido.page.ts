@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { Alertas } from 'src/app/servicio/alertas';
 import { Basedatos } from 'src/app/servicio/basedatos';
+import { pedido } from 'src/app/interfaces/pedido';
+import { pedidoinicio } from 'src/app/objetos/pedidoinicial';
 
 
 @Component({
@@ -77,6 +79,12 @@ export class RegistrarPedidoPage implements OnInit {
 
     this.modalAbierto=false;
     this.productoTemporal=null;
+
+  }
+
+  seleccionarProducto(){
+      
+
 
   }
 

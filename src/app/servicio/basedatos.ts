@@ -248,5 +248,47 @@ async eliminarProducto(productoId: string) {
 
 
 
+// MODULO DE PEDIDOS
+
+async guardarPedidos(data:any): Promise<void>{
+
+  try{
+   const pedidosColecion=collection(this.conexion,'pedidos');
+   await addDoc(pedidosColecion,data);
+   console.log( "Registro de pedido guardao correctamente en firestore");
+
+  }catch(error){
+
+console.error("Error al registrar el pedido por ",error);
+throw new Error("Fallo al guardar los datos del pedido en firestore");
+  }
+}
+
+async obtenerPedidos(){
+
+  try{
+
+const pedidoRef=collection(this.conexion,'pedidos');
+const copiaConsulta=await getDocs(pedidoRef);
+const pedidos=copiaConsulta.docs.map(doc=>{
+
+  return { 
+    id:doc.id,
+    ...doc.data()
+  };
+});
+  console.log('Pedidos obtenidos : ',pedidos);
+  return {success:true, data:pedidos};
+
+  }catch(error){
+
+   console.error('Error al obtener pedidos, no se pudo por ',error);
+   return {success:false, error};
+
+  }
+}
+
+
+
   
 }

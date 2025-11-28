@@ -85,7 +85,8 @@ reader.onload = (e: any) => {
         // Datos Esenciales del Producto Base
         nombre: ['', Validators.required],
         sku: ['', Validators.required],
-        genero: ['Unisex', Validators.required], // Valor por defecto
+        genero: ['Unisex', Validators.required],
+        tipo: ['', Validators.required], // Valor por defecto
         precio: [0, [Validators.required, Validators.min(0.01)]],
         descripcion: [''],
         
@@ -124,6 +125,7 @@ reader.onload = (e: any) => {
             nombre: formValue.nombre,
             sku: formValue.sku,
             genero: formValue.genero,
+            tipo:formValue.tipo,
             precio: formValue.precio,
             descripcion: formValue.descripcion,
             imagen_url: finalImageUrl, // URL final de Cloudinary

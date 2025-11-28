@@ -146,14 +146,29 @@
    
     <ion-card class="cardhorizontal" *ngFor="let produ of listaproductos" button="true" (click)="abrirModal(produ)">
        <ion-card-header>
+            <img [src]="produ.imagen_url" alt="Descripción de la imagen" class="imagenproducto"> 
             {{produ.nombre}}
        </ion-card-header>
        <ion-card-content>
+        <p>S/ {{ produ.precio}}</p>
 
        </ion-card-content>
     </ion-card>
    
   </div>
+
+  <ion-item class="metodopago">
+        <ion-label>Metodo de Pago*</ion-label>
+        <ion-select 
+          id="metodo-pedido"
+          
+          required 
+          interface="popover">
+          <ion-select-option >Efectivo</ion-select-option>
+          <ion-select-option >Tarjeta</ion-select-option>
+          <ion-select-option >Yape</ion-select-option>
+        </ion-select>
+  </ion-item>
   
   <ion-item-divider>
     <ion-label>Resumen del pedido</ion-label>
@@ -183,6 +198,8 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
+  
 
 </ion-content>
 
@@ -218,10 +235,16 @@
 
     <ion-content class="ion-padding">
       <div *ngIf="productoTemporal">
-        <p class="texto-centro-modal">Precio Unitario: <b></b></p>
+        <p class="texto-centro-modal">Precio Unitario: <b>${{productoTemporal.precio}}</b></p>
         <ion-grid>
           <ion-row>
             <ion-col size="4" *ngFor="let talla of ['S','M','L']">
+              <ion-label>Talla {{talla}}</ion-label>
+
+              <p style="font-size: 12px; margin: 2px 0; color: gray;">
+            Stock: <b>{{ productoTemporal.stock_por_talla[talla] || 0 }}</b>
+              </p>
+
               <div class="input-talla">
                 <ion-input type="number" placeholder="0">
 
