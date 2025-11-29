@@ -47,10 +47,12 @@ export class RegistrarPedidoPage implements OnInit {
     }
 
   ngOnInit() {
-    this.cargarDatos();
+    //this.cargarDatos();
   }
 
-
+  ionViewWillEnter() {
+  this.cargarDatos(); // Se ejecuta cada vez que entras a la vista
+}
 
   async cargarDatos(){
 
@@ -247,9 +249,9 @@ try {
       this.alerta.mostrarMensaje("Pedido registrado correctamente");
       
       // LIMPIEZA TOTAL
-      this.miFormulario.reset(); // Limpia cliente y pago
+      this.miFormulario.reset(); // Limpia cliente , pago y notas
       this.productosseleccionados = []; // Limpia carrito
-      this.router.navigate(['/menu']);
+      //this.router.navigate(['/menu']);
 
     } catch (error) {
       console.error(error);
