@@ -39,7 +39,8 @@ export class RegistrarPedidoPage implements OnInit {
      this.miFormulario=this.fb.group({
 
       cliente:[null,Validators.required],
-      metodopago:['',Validators.required]
+      metodopago:['',Validators.required],
+      notas: ['']
      });
 
 
@@ -203,29 +204,31 @@ return;
   return;
  }
 
- const clienteElegido = this.miFormulario.get('cliente')?.value;
+ /*const clienteElegido = this.miFormulario.get('cliente')?.value;
  if (!clienteElegido) {
      this.alerta.mostrarMensaje("Falta cliente");
      return;
-  }
+  }*/
 
-const{cliente,metodopago}=this.miFormulario.value;
+const{cliente,metodopago,notas}=this.miFormulario.value;
+console.log(cliente);
 
 const nuevoPedido: pedido = {
       ...pedidoinicio,
 
       cliente: {
           // Aquí mapeamos los datos del "clienteElegido"
-          clienteid: clienteElegido.clienteid, 
-          nombre: clienteElegido.nombre,
-          direccion: clienteElegido.direccion || ''
+          clienteid: cliente.id, 
+          nombre: cliente.nombre,
+          direccion: cliente.direccion || ''
       },
 
       item: this.productosseleccionados,
       // ... resto de datos
       total: this.totalGlobal,
       metodopago: metodopago,
-      fechaorigen: new Date()
+      fechaorigen: new Date(),
+      notas:notas || ''
   };
 
 try {

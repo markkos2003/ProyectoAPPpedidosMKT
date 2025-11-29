@@ -14,5 +14,5 @@ export const pedidoinicio:pedido={
    total:0,
    metodopago:'',
    estado:'en proceso',
-
+   notas:''
 };

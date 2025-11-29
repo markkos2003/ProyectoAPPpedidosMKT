@@ -7,6 +7,7 @@ fechaentrega:Date | null;
 total:number;
 metodopago:'efectivo'| 'tarjeta'| 'yape' | '';
 estado: 'en proceso' | 'cancelado' | 'entregado';
+notas?: string;
 
 }
 
