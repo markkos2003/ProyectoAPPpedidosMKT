@@ -15,7 +15,7 @@ productoid:string;
 nombreproducto:string;
 tallaselegidas:tallas;
 cantidad:number;
-preciunitario:number;
+preciounitario:number;
 subtotal:number;
 
 }

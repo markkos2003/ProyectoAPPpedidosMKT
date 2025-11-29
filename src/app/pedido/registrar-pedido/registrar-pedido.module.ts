@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { RegistrarPedidoPageRoutingModule } from './registrar-pedido-routing.module';
+
 
 import { RegistrarPedidoPage } from './registrar-pedido.page';
 
@@ -13,6 +14,7 @@ import { RegistrarPedidoPage } from './registrar-pedido.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
     RegistrarPedidoPageRoutingModule
   ],
   declarations: [RegistrarPedidoPage]

@@ -13,7 +13,8 @@ import {
   updateDoc,
   deleteDoc,
   query,
-  where
+  where,
+  runTransaction
 } from '@angular/fire/firestore';
 
 
@@ -285,6 +286,52 @@ const pedidos=copiaConsulta.docs.map(doc=>{
    console.error('Error al obtener pedidos, no se pudo por ',error);
    return {success:false, error};
 
+  }
+}
+
+
+async descontarStock(productoId: string, tallasAVender: any) {
+  try {
+    // 1. Crear la referencia al documento usando la función 'doc'
+    // Sintaxis: doc(instanciaFirestore, nombreColeccion, idDocumento)
+    const productoRef = doc(this.conexion, 'productos', productoId);
+
+    // 2. Ejecutar la transacción
+    await runTransaction(this.conexion, async (transaction) => {
+      
+      // A) Leer el documento DENTRO de la transacción
+      const documento = await transaction.get(productoRef);
+
+      if (!documento.exists()) {
+        throw "El producto no existe";
+      }
+
+      // B) Obtener la data
+      const data = documento.data() as any;
+      const stockActual = data.stock_por_talla || {}; // Protección por si es null
+
+      // C) Calcular el nuevo stock (Tu lógica original)
+      const nuevoStock = {
+        S: (stockActual.S || 0) - (tallasAVender.S || 0),
+        M: (stockActual.M || 0) - (tallasAVender.M || 0),
+        L: (stockActual.L || 0) - (tallasAVender.L || 0)
+      };
+
+      // D) Validar negativos
+      if (nuevoStock.S < 0 || nuevoStock.M < 0 || nuevoStock.L < 0) {
+        throw "No hay stock suficiente para realizar esta venta";
+      }
+
+      // E) Escribir el cambio (UPDATE)
+      // En modular, transaction.update recibe la referencia y el objeto a cambiar
+      transaction.update(productoRef, { stock_por_talla: nuevoStock });
+    });
+
+    return { success: true };
+
+  } catch (error) {
+    console.error("Error en transacción:", error);
+    return { success: false, error: error };
   }
 }
 

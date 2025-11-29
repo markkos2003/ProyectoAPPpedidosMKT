@@ -124,13 +124,15 @@
 
 
 <ion-content class="ioncuerpo">
+  <div [formGroup]="miFormulario">
 
-  <div class="elegircliente">
+  <div class="elegircliente" >
       <ion-item  class="clienteelecto">
           <ion-icon name="person-circle" slot="start" color="primary" size="large"></ion-icon>
           <ion-label position="stacked">CLIENTE/EMPRESA</ion-label>
-          <ion-select placeholder="Seleccionar...">
-            <ion-select-option *ngFor="let clien of listaclientes">{{clien.nombre}}</ion-select-option>
+          <ion-select  placeholder="Seleccionar..."
+          formControlName="cliente">
+            <ion-select-option *ngFor="let clien of listaclientes" [value]="clien">{{clien.nombre}}</ion-select-option>
 
           </ion-select>
       </ion-item>
@@ -144,7 +146,11 @@
 
   <div class="listahorizontal">
    
-    <ion-card class="cardhorizontal" *ngFor="let produ of listaproductos" button="true" (click)="abrirModal(produ)">
+    <ion-card class="cardhorizontal" 
+    *ngFor="let produ of listaproductos" 
+    button="true" 
+    [disabled]="esProductoSeleccionado(produ.id)"
+    (click)="!esProductoSeleccionado(produ.id) && abrirModal(produ)">
        <ion-card-header>
             <img [src]="produ.imagen_url" alt="Descripción de la imagen" class="imagenproducto"> 
             {{produ.nombre}}
@@ -157,11 +163,11 @@
    
   </div>
 
-  <ion-item class="metodopago">
+  <ion-item class="metodopagos">
         <ion-label>Metodo de Pago*</ion-label>
         <ion-select 
           id="metodo-pedido"
-          
+          formControlName="metodopago"
           required 
           interface="popover">
           <ion-select-option >Efectivo</ion-select-option>
@@ -169,6 +175,8 @@
           <ion-select-option >Yape</ion-select-option>
         </ion-select>
   </ion-item>
+
+  </div>
   
   <ion-item-divider>
     <ion-label>Resumen del pedido</ion-label>
@@ -184,15 +192,23 @@
     <ion-item-sliding *ngFor="let item of productosseleccionados;let i=index">
       <ion-item lines="full">
         <ion-label>
-          <h2></h2>
-          <p></p>
+          <h2>{{item.nombreproducto}}</h2>
+          <p>
+            
+              S: <b>{{ item.tallaselegidas.S || 0}}</b> |
+              M: <b>{{ item.tallaselegidas.M || 0}}</b> | 
+              L: <b>{{ item.tallaselegidas.L || 0}}</b> 
+          </p>
+          <p>
+            {{ item.cantidad}} unid. x S/  {{ item.preciounitario}}
+          </p>
         </ion-label>
         <ion-note slot="end" color="dark" style="font-weight: bold;">
-
+           S/ {{ item.subtotal}}
         </ion-note>
       </ion-item>
       <ion-item-options>
-        <ion-item-option color="danger">
+        <ion-item-option color="danger" (click)="borrarItem(i)">
           <ion-icon name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
@@ -213,8 +229,9 @@
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button expand="block" color="primary" [disabled]="productosseleccionados.length===0">
-            REGISTRAR PEDIDO
+          <ion-button expand="block" color="primary" 
+          [disabled]="miFormulario.invalid || productosseleccionados.length===0">
+            REGISTRAR PEDIDO ( S/{{totalGlobal}})
           </ion-button>
         </ion-col>
       </ion-row>
@@ -246,7 +263,13 @@
               </p>
 
               <div class="input-talla">
-                <ion-input type="number" placeholder="0">
+                <ion-input type="number" 
+                inputmode="numeric"
+                [(ngModel)]="seleccionTemporal[talla]" 
+                (keypress)="soloNumeros($event)"
+                placeholder="0" 
+                min="0"
+                [max]="productoTemporal.stock_por_talla[talla] || 0">
 
                 </ion-input>
               </div>
@@ -254,13 +277,13 @@
           </ion-row>
         </ion-grid>
         <div class="modal-acciones ion-margin-top">
-          <ion-button expand="block" >
+          <ion-button expand="block" (click)="agregarCarrito()">
              Listo - Agregar
           </ion-button>
         </div>
       </div>
 
-
+    
     </ion-content>
   </ng-template>
 </ion-modal>
