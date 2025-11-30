@@ -43,6 +43,21 @@ async cargarPedidos(){
 }
 
 
+
+getColorEstado(estado: string): string {
+    switch (estado) {
+      case 'en proceso':
+        return 'warning';
+      case 'cancelado':
+        return 'danger';
+      case 'recibido':
+        return 'success';
+      default:
+        return 'medium';
+    }
+  }
+
+
 aplicarFiltros(){
 
   let resultado=[...this.listapedidos];
