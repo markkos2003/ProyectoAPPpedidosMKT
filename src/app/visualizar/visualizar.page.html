@@ -15,6 +15,8 @@
 <ion-content [fullscreen]="true">
   <!-- Barra de búsqueda -->
   <ion-searchbar 
+    [(ngModel)]="terminoBusqueda"
+    (ionInput)="buscarPedidos()"
     placeholder="Buscar por cliente o producto"
     animated>
   </ion-searchbar>
@@ -22,21 +24,29 @@
   <!-- Filtros por estado -->
   <div class="filtros-container">
     <ion-button 
+       [class.activo]="filtroestado==='en proceso'"
+       (click)="filtrarPorEstado('en proceso')"
       class="btn-proceso activo">
       EN PROCESO
     </ion-button>
     
     <ion-button 
+      [class.activo]="filtroestado==='cancelado'"
+      (click)="filtrarPorEstado('cancelado')"
       class="btn-cancelado">
       CANCELADO
     </ion-button>
     
     <ion-button 
+      [class.activo]="filtroestado==='recibido'"
+      (click)="filtrarPorEstado('recibido')"
       class="btn-recibido">
       RECIBIDO
     </ion-button>
 
     <ion-button 
+      [class.activo]="filtroestado==='todos'"
+      (click)="filtrarPorEstado('todos')"
       fill="outline">
       TODOS
     </ion-button>
@@ -85,7 +95,8 @@
         <ion-button
         size="small"
         fill="outline"
-        color="warning">
+        color="warning"
+        (click)="cambiarEstado(pedido)">
         <ion-icon slot="start" name="sync-outline"></ion-icon>
           Cambiar Estado
         </ion-button>

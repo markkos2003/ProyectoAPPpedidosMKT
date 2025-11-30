@@ -14,7 +14,9 @@ import {
   deleteDoc,
   query,
   where,
-  runTransaction
+  runTransaction,
+  increment,
+  writeBatch
 } from '@angular/fire/firestore';
 
 
@@ -275,8 +277,9 @@ const pedidos=copiaConsulta.docs.map(doc=>{
   const data=doc.data() as any;
 
   return { 
-    id:doc.id,
+    
     ...data,
+    id:doc.id,
     fechaorigen:data.fechaorigen?.toDate ? data.fechaorigen.toDate():data.fechaorigen,
     fechaentrega:data.fechaentrega?.toDate ? data.fechaentrega.toDate():data.fechaentrega
 
@@ -338,6 +341,75 @@ async descontarStock(productoId: string, tallasAVender: any) {
     console.error("Error en transacción:", error);
     return { success: false, error: error };
   }
+}
+
+
+async cambiarEstadoPedido(pedido:any,nuevoEstado:'cancelado'| 'entregado' | 'en proceso'){
+
+try{
+const pedidoRef=doc(this.conexion,'pedidos',pedido.id);
+
+if(nuevoEstado==='cancelado'){
+
+ const batch=writeBatch(this.conexion);
+ batch.update(pedidoRef,{estado:'cancelado'});
+
+ for(const item of pedido.item){
+const productoRef=doc(this.conexion,'productos',item.productoid);
+const actualizacionStock:any={};
+
+if(item.tallaselegidas.S>0){
+
+  actualizacionStock['stock_por_talla.S']=increment(item.tallaselegidas.S);
+}
+
+if(item.tallaselegidas.M>0){
+
+  actualizacionStock['stock_por_talla.M']=increment(item.tallaselegidas.M);
+}
+
+if(item.tallaselegidas.L>0){
+
+  actualizacionStock['stock_por_talla.L']=increment(item.tallaselegidas.L);
+}
+
+batch.update(productoRef,actualizacionStock);
+
+
+ }
+ await batch.commit();
+
+}else if(nuevoEstado==='entregado'){
+
+await updateDoc(pedidoRef,{
+  estado:'entregado',
+  fechaentrega:new Date()
+});
+
+
+}else{
+
+ await updateDoc(pedidoRef,{
+
+  estado:'en proceso',
+  fechaentrega:null
+ });
+
+
+
+}
+
+return {success:true};
+
+}catch(error){
+
+  console.error('Error cambiando de estado: ',error);
+  return {success:false,error};
+}
+
+
+
+
 }
 
 
