@@ -5,6 +5,7 @@ import { Servicioimagen } from 'src/app/servicio/servicioimagen';
 import { Alertas } from 'src/app/servicio/alertas';
 import { Basedatos } from 'src/app/servicio/basedatos';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class RegistrarProductoPage implements OnInit {
   selectedFile: File | null = null;
   imagenPreviewUrl: string = ''; // Usado para mostrar la imagen seleccionada
   isLoading: boolean = false;
+  archivoListoParaCloudinary: any = null;
 
 
    productoForm!: FormGroup;
@@ -41,6 +43,44 @@ private basedato:Basedatos) {
 
 
 
+}
+
+
+
+
+async probarCamara() {
+
+
+try{
+// Esto abrirá la interfaz de PWA Elements
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl, // Base64 directo
+      source: CameraSource.Camera
+    });
+
+    // Si funciona, la imagen se guardará aquí
+    this.imagenPreviewUrl = image.dataUrl!;
+    this.archivoListoParaCloudinary = this.dataURLtoBlob(image.dataUrl!);
+
+
+
+}catch(error){
+  console.log("El usuario cerro la camara o hubo error ",error);
+}
+  
+    
+  }
+
+
+  dataURLtoBlob(dataurl: string) {
+  var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)![1],
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+  while(n--){
+      u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], {type:mime});
 }
 
 
@@ -104,8 +144,10 @@ reader.onload = (e: any) => {
 
 
     async registrarProducto() {
+
+      const archivoFinal = this.archivoListoParaCloudinary || this.selectedFile;
     // Validación principal
-    if (this.productoForm.invalid || !this.selectedFile) {
+    if (this.productoForm.invalid || !archivoFinal) {
       await this.alerta.mostrarMensaje( 'Completa los campos obligatorios y selecciona una imagen.');
       return;
     }
@@ -117,7 +159,7 @@ reader.onload = (e: any) => {
         // 1. Subida a Cloudinary
         //await this.alerta.mostrarDialogo('Procesando', 'Subiendo imagen...');
         console.log('subiendo imagen en el page registrar');
-        finalImageUrl = await this.servicioimag.subirImagen(this.selectedFile as File);
+        finalImageUrl = await this.servicioimag.subirImagen(archivoFinal);
 
         // 2. Construir el objeto final con el mapa de stock
         const formValue = this.productoForm.value;
@@ -169,6 +211,8 @@ reader.onload = (e: any) => {
     if (this.fileInput) {
       this.fileInput.nativeElement.value = '';
     }
+    this.archivoListoParaCloudinary = null; // Borra el Blob
+  
   }
 
 

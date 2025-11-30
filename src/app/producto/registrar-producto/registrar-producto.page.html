@@ -182,6 +182,10 @@
         <ion-icon slot="start" name="camera"></ion-icon>
         {{ selectedFile ? 'CAMBIAR IMAGEN' : 'AGREGAR IMAGEN' }}
       </ion-button>
+      <ion-button expand="block" fill="outline" (click)="probarCamara()" type="button">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Probar Camara
+      </ion-button>
 
       <input 
         type="file" 
@@ -304,7 +308,7 @@
         expand="block" 
         type="submit" 
         class="submit-btn"
-        [disabled]="productoForm.invalid || !selectedFile || isLoading">
+        [disabled]="productoForm.invalid || (!selectedFile && !archivoListoParaCloudinary) || isLoading">
         {{ isLoading ? 'GUARDANDO...' : 'GUARDAR PRODUCTO' }}
       </ion-button>
     </form>
