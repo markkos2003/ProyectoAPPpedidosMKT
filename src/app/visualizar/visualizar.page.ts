@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
+import { Basedatos } from '../servicio/basedatos';
+import { Alertas } from '../servicio/alertas';
 
 @Component({
   selector: 'app-visualizar',
@@ -9,18 +11,67 @@ import { Router} from '@angular/router';
 })
 export class VisualizarPage implements OnInit {
 
-  constructor(private router:Router) { }
+listapedidos:any []=[];
+pedidosFiltrados: any []=[];
+
+
+
+  constructor(private router:Router,
+    private base:Basedatos,
+    private alerta:Alertas
+  ) { }
 
   ngOnInit() {
+    this.cargarPedidos();
+  }
+
+async cargarPedidos(){
+
+  const respuesta=await this.base.obtenerPedidos();
+  if(respuesta.success){
+
+    this.listapedidos=respuesta.data;
+    console.log(this.listapedidos);
+    this.aplicarFiltros();
+
+  }else{
+
+    console.error("No se pudo traer los pedidos por ",respuesta.error);
   }
 
 
+}
+
+
+aplicarFiltros(){
+
+  let resultado=[...this.listapedidos];
+  //filtros
+
+
+
+  this.pedidosFiltrados=resultado;
+
+
+}
+
+
+  
 
 
 
 
 
-  volverMenu(){
+
+
+
+
+
+
+
+
+
+volverMenu(){
 
   const activo = document.activeElement as HTMLElement | null;
     if (activo) {

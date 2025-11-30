@@ -1,53 +1,13 @@
-<!--<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-button routerLink="/menu">
-    <ion-icon slot="icon-only" name="arrow-back"></ion-icon> 
-  </ion-button>
-    <ion-title>ESTADO DE PEDIDOS</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      
-      <ion-title size="large">visualizar</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
- <ion-searchbar>  </ion-searchbar>
-
- <ion-grid>
-
-<ion-row>
-
-<ion-col><ion-button class="botonproceso">EN PROCESO</ion-button></ion-col>
-<ion-col><ion-button class="botoncancelado">CANCELADO</ion-button></ion-col>
-<ion-col><ion-button class="botonrecibido">RECIBIDO</ion-button></ion-col>
-
-</ion-row>
-
- </ion-grid>
-
-
- <ion-list>
-
-  <ion-item >  pedido1</ion-item>
-  <ion-item >  pedido2</ion-item>
-
-
- </ion-list>
 
 
 
-</ion-content>-->
 
 
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/menu"></ion-back-button>
-    </ion-buttons>
+    <ion-button (click)="volverMenu()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
     <ion-title>VISUALIZAR PEDIDOS</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -85,7 +45,7 @@
   <!-- Lista de pedidos de ejemplo -->
   <ion-list>
     <!-- Pedido 1: EN PROCESO -->
-    <ion-card class="pedido-card">
+    <!--<ion-card class="pedido-card">
       <ion-card-header>
         <div class="pedido-header">
           <div>
@@ -103,9 +63,9 @@
         </div>
       </ion-card-header>
 
-      <ion-card-content>
+      <ion-card-content>-->
         <!-- Productos del pedido -->
-        <div class="productos-lista">
+        <!--<div class="productos-lista">
           <div class="producto-item">
             <ion-icon name="cube-outline"></ion-icon>
             <span class="producto-nombre">Laptop Modelo X</span>
@@ -118,21 +78,21 @@
             <span class="producto-cantidad">x2</span>
             <span class="producto-precio">S/ 100.00</span>
           </div>
-        </div>
+        </div>-->
 
         <!-- Total -->
-        <div class="total-pedido">
+        <!--<div class="total-pedido">
           <strong>Total: S/ 1600.00</strong>
-        </div>
+        </div>-->
 
         <!-- Notas -->
-        <div class="notas">
+        <!--<div class="notas">
           <ion-icon name="document-text-outline"></ion-icon>
           <span>Entrega urgente antes de las 5 PM.</span>
-        </div>
+        </div>-->
 
         <!-- Acciones -->
-        <div class="acciones-pedido">
+        <!--<div class="acciones-pedido">
           <ion-button 
             size="small" 
             fill="outline" 
@@ -149,10 +109,10 @@
           </ion-button>
         </div>
       </ion-card-content>
-    </ion-card>
+    </ion-card>-->
 
     <!-- Pedido 2: RECIBIDO -->
-    <ion-card class="pedido-card">
+    <!--<ion-card class="pedido-card">
       <ion-card-header>
         <div class="pedido-header">
           <div>
@@ -201,10 +161,10 @@
           </ion-button>
         </div>
       </ion-card-content>
-    </ion-card>
+    </ion-card>-->
 
     <!-- Pedido 3: CANCELADO -->
-    <ion-card class="pedido-card">
+    <!--<ion-card class="pedido-card">
       <ion-card-header>
         <div class="pedido-header">
           <div>
@@ -253,7 +213,7 @@
           </ion-button>
         </div>
       </ion-card-content>
-    </ion-card>
+    </ion-card>-->
     
     <!-- Mensaje cuando no hay pedidos (de ejemplo) -->
     <!-- Quitaré el *ngIf y lo dejaré comentado para que se vea la estructura
@@ -264,5 +224,36 @@
       </ion-card-content>
     </ion-card>
     -->
+
+
+    <ion-card *ngFor="let pedido of pedidosFiltrados" class="pedido-card">
+      <ion-card-header>
+        <div class="pedido-header">
+          <div>
+            <ion-card-title>{{pedido.cliente?.nombre}}</ion-card-title>
+            <ion-card-subtitle>
+              <ion-icon name="calendar-outline"></ion-icon>
+              {{pedido.fechaorigen | date:'dd/MM/yyyy HH:mm' }}
+            </ion-card-subtitle>
+
+          </div>
+       </div>
+      </ion-card-header>
+      <ion-card-content>
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+
+    <ion-card *ngIf="pedidosFiltrados.length===0" class="no-pedidos">
+      <ion-card-content>
+        <ion-icon name="document-outline" class="icono-grande"></ion-icon>
+        <p>NO HAY PEDIDOS QUE MOSTRAR</p>
+
+      </ion-card-content>
+    </ion-card>
+
   </ion-list>
 </ion-content>

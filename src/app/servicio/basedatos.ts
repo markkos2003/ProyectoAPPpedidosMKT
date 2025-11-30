@@ -272,10 +272,15 @@ async obtenerPedidos(){
 const pedidoRef=collection(this.conexion,'pedidos');
 const copiaConsulta=await getDocs(pedidoRef);
 const pedidos=copiaConsulta.docs.map(doc=>{
+  const data=doc.data() as any;
 
   return { 
     id:doc.id,
-    ...doc.data()
+    ...data,
+    fechaorigen:data.fechaorigen?.toDate ? data.fechaorigen.toDate():data.fechaorigen,
+    fechaentrega:data.fechaentrega?.toDate ? data.fechaentrega.toDate():data.fechaentrega
+
+    
   };
 });
   console.log('Pedidos obtenidos : ',pedidos);
