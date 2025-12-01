@@ -62,6 +62,7 @@ try{
 
     // Si funciona, la imagen se guardará aquí
     this.imagenPreviewUrl = image.dataUrl!;
+    this.selectedFile=null;
     this.archivoListoParaCloudinary = this.dataURLtoBlob(image.dataUrl!);
 
 
@@ -94,6 +95,7 @@ try{
  const file = event.target.files[0];
   if (file) {
  this.selectedFile = file;
+ this.archivoListoParaCloudinary=null;
 const reader = new FileReader();
 reader.onload = (e: any) => {
  this.imagenPreviewUrl = e.target.result; // Para la previsualización
@@ -110,6 +112,7 @@ reader.onload = (e: any) => {
     this.imagenPreviewUrl = '';
     this.selectedFile = null;
     this.fileInput.nativeElement.value = '';
+    this.archivoListoParaCloudinary=null;
   }
 
 

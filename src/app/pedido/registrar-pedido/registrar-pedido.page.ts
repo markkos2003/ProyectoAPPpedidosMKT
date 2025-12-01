@@ -263,6 +263,19 @@ try {
  }
 
 
+ async cancelarcarro(){
+      let confirmar= await this.alerta.dialogoConfirmacion("Seguro que desea cancelar, se perdera todo lo registrado en el pedido actual y tendra que volver a escoger de nuevo")
+      if(confirmar){
+        this.miFormulario.reset(); // Limpia cliente , pago y notas
+        this.productosseleccionados = []; // Limpia carrito
+
+      }
+      
+
+
+ }
+
+
 
 
   volverMenu(){

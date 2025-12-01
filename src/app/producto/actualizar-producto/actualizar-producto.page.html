@@ -29,6 +29,12 @@
         {{ (imagenPreviewUrl || productoActual?.imagen_url) ? 'CAMBIAR IMAGEN' : 'AGREGAR IMAGEN' }}
       </ion-button>
 
+      <ion-button expand="block" fill="outline" (click)="probarCamara()" type="button">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Probar Camara
+      </ion-button>
+
+
       <input 
         type="file" 
         #fileInput 

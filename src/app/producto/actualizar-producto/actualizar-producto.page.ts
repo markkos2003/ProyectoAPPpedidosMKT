@@ -4,6 +4,7 @@ import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { Basedatos } from 'src/app/servicio/basedatos';
 import { Servicioimagen } from 'src/app/servicio/servicioimagen';
 import { Alertas } from 'src/app/servicio/alertas';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-actualizar-producto',
@@ -30,6 +31,48 @@ export class ActualizarProductoPage implements OnInit {
   imagenactual: string | null = null;
   
   productoid:string | null=null;
+
+
+  //probar y boorrar si no funciona
+ archivoListoParaCloudinary: any = null;
+
+ dataURLtoBlob(dataurl: string) {
+  var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)![1],
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+  while(n--){
+      u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], {type:mime});
+}
+
+async probarCamara() {
+
+
+try{
+// Esto abrirá la interfaz de PWA Elements
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl, // Base64 directo
+      source: CameraSource.Camera
+    });
+
+    // Si funciona, la imagen se guardará aquí
+    this.imagenPreviewUrl = image.dataUrl!;
+    this.archivoListoParaCloudinary = this.dataURLtoBlob(image.dataUrl!);
+    this.selectedFile=null;
+    this.imagencamnbiada=true;
+
+
+}catch(error){
+  console.log("El usuario cerro la camara o hubo error ",error);
+}
+  
+    
+  }
+
+
+
   constructor(
   private fb:FormBuilder,
   private base:Basedatos,
@@ -90,6 +133,7 @@ this.productoForm.patchValue({
   nombre:datos.nombre,
   sku:datos.sku,
   genero:datos.genero,
+  tipo:datos.tipo,
   precio:datos.precio,
   descripcion:datos.descripcion,
   //imagen_url:datos.imagen_url,
@@ -101,7 +145,7 @@ console.log(datos);
 
 
 console.error('ERROR AL CARGAR DATOS',error);
-this.alerta.mostrarDialogo('ERROR AL CARGAR LOS DATOS DEL CLIENTE');
+this.alerta.mostrarDialogo('ERROR AL CARGAR LOS DATOS DEL Producto');
 //this.navegar.back();
 
 }finally{
@@ -120,6 +164,7 @@ onFileSelected(event: any) {
  const file = event.target.files[0];
   if (file) {
  this.selectedFile = file;
+ this.archivoListoParaCloudinary=null;
  this.imagencamnbiada=true;
 const reader = new FileReader();
 reader.onload = (e: any) => {
@@ -138,8 +183,10 @@ seleccionarImagen() {
 
   eliminarImagen() {
  this.imagenPreviewUrl = '';
-    this.selectedFile = null;
+ this.selectedFile = null;
  this.fileInput.nativeElement.value = '';
+ this.archivoListoParaCloudinary=null;
+ this.imagencamnbiada=false;
 }
 
 
@@ -179,8 +226,17 @@ try{
 
 if(this.imagencamnbiada){
 
-finalImageUrl=await this.imagservi.subirImagen(this.selectedFile as File);
-//this.imagenactual=finalImageUrl;
+
+  const archivoFinal = this.archivoListoParaCloudinary || this.selectedFile;
+    // Validación principal
+ if (!archivoFinal) {
+ await this.alerta.mostrarMensaje( 'C selecciona una imagen.');
+ return;
+ }
+//habilitar de nuevo si falla
+//finalImageUrl=await this.imagservi.subirImagen(this.selectedFile as File);
+finalImageUrl=await this.imagservi.subirImagen(archivoFinal);
+
 datosactualizados.imagen_url=finalImageUrl;
 console.log('si llegue aqui para actualiazar la imagen')
 }else{
