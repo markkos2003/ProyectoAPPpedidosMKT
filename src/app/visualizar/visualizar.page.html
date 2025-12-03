@@ -38,10 +38,10 @@
     </ion-button>
     
     <ion-button 
-      [class.activo]="filtroestado==='recibido'"
-      (click)="filtrarPorEstado('recibido')"
+      [class.activo]="filtroestado==='entregado'"
+      (click)="filtrarPorEstado('entregado')"
       class="btn-recibido">
-      RECIBIDO
+      ENTREGADO
     </ion-button>
 
     <ion-button 
@@ -96,6 +96,7 @@
         size="small"
         fill="outline"
         color="warning"
+        [disabled]="desactivarBotonCambioEstado(pedido.estado)"
         (click)="cambiarEstado(pedido)">
         <ion-icon slot="start" name="sync-outline"></ion-icon>
           Cambiar Estado
@@ -104,7 +105,8 @@
         <ion-button
         size="small"
         fille="clear"
-        color="danger">
+        color="danger"
+        (click)="eliminarPedidos(pedido.id)">
         <ion-icon slot="icon-only" name="trash"></ion-icon>
         </ion-button>
       </div>

@@ -95,7 +95,7 @@ async obtenerClientes() {
   async eliminarCliente(clienteId: string) {
     // 1. Verificar Referencias (Mantenemos la lógica de bloqueo)
     const pedidosRef = collection(this.conexion, 'pedidos');
-    const q = query(pedidosRef, where('clienteId', '==', clienteId));
+    const q = query(pedidosRef, where('cliente.clienteid', '==', clienteId));
     const pedidosSnapshot = await getDocs(q);
 
     if (!pedidosSnapshot.empty) {
@@ -232,7 +232,7 @@ async editarProducto(id: string, datosActualizados: any): Promise<void> {
 async eliminarProducto(productoId: string) {
     // 1. Verificar Referencias (Mantenemos la lógica de bloqueo)
     const pedidosRef = collection(this.conexion, 'pedidos');
-    const q = query(pedidosRef, where('productoId', '==', productoId));
+    const q = query(pedidosRef, where('productoid', '==', productoId));
     const pedidosSnapshot = await getDocs(q);
 
     if (!pedidosSnapshot.empty) {
@@ -408,6 +408,25 @@ return {success:true};
 }
 
 
+
+
+}
+
+
+async eliminarPedido(idpedido:string){
+
+const docRef = doc(this.conexion, 'pedidos', idpedido);
+    
+
+    try{
+    await deleteDoc(docRef);
+    console.log("Exito AL ELIMINAR EL PEDIDO");
+
+    }catch(error){
+
+    console.error("Error al eliminar el pedido por ",error);
+
+    }
 
 
 }

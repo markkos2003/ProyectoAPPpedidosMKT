@@ -56,7 +56,7 @@ getColorEstado(estado: string): string {
         return 'warning';
       case 'cancelado':
         return 'danger';
-      case 'recibido':
+      case 'entregado':
         return 'success';
       default:
         return 'medium';
@@ -159,7 +159,35 @@ await alertamostrar.present();
 }
 
 
+async eliminarPedidos(id:string){
 
+const confirmar=await this.alerta.dialogoConfirmacion("Seguro de eliminar pedidos esta acción sera irreversible","CONFIRMAR");
+
+if(confirmar){
+
+  try{
+
+    await this.base.eliminarPedido(id);
+    await this.alerta.mostrarMensaje("Pedido eliminado");
+    this.cargarPedidos();
+
+  }catch(error){
+    
+    console.log("Error al eliminar el pedido por ",error);
+    await this.alerta.mostrarMensaje("Error al eliminar el pedido");
+  }
+
+
+}
+
+
+
+}
+
+desactivarBotonCambioEstado(estado:string){
+
+return ['cancelado','entregado'].includes(estado);
+}
 
 
 
