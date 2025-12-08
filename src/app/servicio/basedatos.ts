@@ -16,8 +16,10 @@ import {
   where,
   runTransaction,
   increment,
-  writeBatch
+  writeBatch,
+  limit
 } from '@angular/fire/firestore';
+
 
 
 
@@ -232,7 +234,7 @@ async editarProducto(id: string, datosActualizados: any): Promise<void> {
 async eliminarProducto(productoId: string) {
     // 1. Verificar Referencias (Mantenemos la lógica de bloqueo)
     const pedidosRef = collection(this.conexion, 'pedidos');
-    const q = query(pedidosRef, where('productoid', '==', productoId));
+    const q = query(pedidosRef, where('arregloidprodu', 'array-contains', productoId),limit(1));
     const pedidosSnapshot = await getDocs(q);
 
     if (!pedidosSnapshot.empty) {

@@ -26,8 +26,12 @@
     </ion-fab-button>
   </ion-fab>
   <ion-list>
-    <ion-item *ngFor="let clien of cliente; let i=index">
-    {{ clien }}
+    <ion-item *ngFor="let clien of cliente; let i=index" class="item-cliente">
+      <ion-label>
+        <h2>{{ clien }}</h2>
+        <p>CLIENTE VIP</p>
+      </ion-label>
+    
 
 
     <ion-buttons slot="end">

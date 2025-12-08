@@ -8,7 +8,7 @@ total:number;
 metodopago:'efectivo'| 'tarjeta'| 'yape' | '';
 estado: 'en proceso' | 'cancelado' | 'entregado';
 notas?: string;
-
+arregloidprodu:string[];
 }
 
 export interface itemPedido{

@@ -18,6 +18,7 @@ export class RegistrarPedidoPage implements OnInit {
   listaclientes: any[] = [];
   listaproductos: any[] = [];
   productosseleccionados: any[] = [];
+  listaIDprodus:string []=[];
   //productoSeleccionado: Producto | null = null;
   cantidad: number = 1;
   productoTemporal: any=null;
@@ -212,6 +213,9 @@ return;
      return;
   }*/
 
+ this.listaIDprodus=this.productosseleccionados.map(producto=>producto.productoid) ; 
+ console.log("ESTOS SON LOS IDS a guardar en pedido",this.listaIDprodus) ; 
+
 const{cliente,metodopago,notas}=this.miFormulario.value;
 console.log(cliente);
 
@@ -230,7 +234,8 @@ const nuevoPedido: pedido = {
       total: this.totalGlobal,
       metodopago: metodopago,
       fechaorigen: new Date(),
-      notas:notas || ''
+      notas:notas || '',
+      arregloidprodu:this.listaIDprodus,
   };
 
 try {
