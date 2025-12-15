@@ -20,7 +20,7 @@ constructor(private http:HttpClient){}
 
    async subirImagen(file: File): Promise<string> {
     
-    // ✅ USAR FORMDATA (no objeto JSON)
+    //  USAR FORMDATA (no objeto JSON)
     const formData = new FormData();
     formData.append('file', file); // Enviar el archivo directamente
     formData.append('upload_preset', this.UPLOAD_PRESET);
@@ -30,11 +30,11 @@ constructor(private http:HttpClient){}
         this.http.post(this.CLOUDINARY_URL, formData)
       );
       
-      console.log('✅ Imagen subida correctamente:', response.secure_url);
+      console.log(' Imagen subida correctamente:', response.secure_url);
       return response.secure_url;
 
     } catch (error: any) {
-      console.error('❌ FALLO AL SUBIR A CLOUDINARY:', error);
+      console.error(' FALLO AL SUBIR A CLOUDINARY:', error);
       console.error('Detalles del error:', error.error);
       throw new Error('FALLO AL SUBIR LA IMAGEN');
     }

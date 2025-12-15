@@ -320,7 +320,7 @@ async descontarStock(productoId: string, tallasAVender: any) {
       const data = documento.data() as any;
       const stockActual = data.stock_por_talla || {}; // Protección por si es null
 
-      // C) Calcular el nuevo stock (Tu lógica original)
+      // C) Calcular el nuevo stock 
       const nuevoStock = {
         S: (stockActual.S || 0) - (tallasAVender.S || 0),
         M: (stockActual.M || 0) - (tallasAVender.M || 0),
@@ -440,7 +440,7 @@ async aumentarStock(productoId: string, tallas: { s: number, m: number, l: numbe
   const productoRef = doc(this.conexion, 'productos', productoId);
 
   // Usamos 'increment' para sumar lo que llegue (ej: +10) al valor que ya exista
-  // Nota: Asegúrate que en tu BD el campo se llame 'stock_por_talla' o como lo tengas definido
+  // Asegúrarse que en tu BD el campo se llame 'stock_por_talla' 
   await updateDoc(productoRef, {
     'stock_por_talla.S': increment(tallas.s || 0),
     'stock_por_talla.M': increment(tallas.m || 0),

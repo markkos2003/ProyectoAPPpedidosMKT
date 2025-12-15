@@ -78,37 +78,37 @@ ion-item {
 }
 
 /* 5. CAJA DE BOTONES (ESTILO MKT) */
-.cajabotones {
-  padding: 0 16px 30px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+/* ESTILO BOTÓN ACTUALIZAR (Principal - Naranja Sólido) */
+.cajabotones ion-button[color="success"] {
+  --background: #FF8C42 !important; /* Tu Naranja de marca */
+  --background-activated: #e67e3a;  /* Un poco más oscuro al presionar */
+  --color: white;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 12px rgba(255, 140, 66, 0.4); /* Sombra suave naranja */
+  
+  height: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
 
-  /* Botón Actualizar (NARANJA) */
-  ion-button[color="success"] {
-    --background: #FF8C42 !important; /* Tu Naranja de marca */
-    --background-activated: #e67e3a;
-    --color: white;
-    --border-radius: 12px;
-    height: 50px;
-    font-weight: 700;
-    margin: 0;
-    box-shadow: 0 4px 12px rgba(255, 140, 66, 0.3);
-  }
+/* ESTILO BOTÓN CANCELAR (Secundario - Outline Rojo/Gris) */
+.cajabotones ion-button[color="danger"] {
+  --background: #ffffff !important; /* Fondo blanco para contraste */
+  --background-activated: #fff0f0;  /* Fondo rosado muy suave al presionar */
+  --color: #e53935 !important;      /* Texto Rojo elegante */
+  --border-color: #e53935;
+  --border-width: 2px;
+  --border-style: solid;
+  --border-radius: 12px;
+  --box-shadow: none;               /* Sin sombra para que se vea plano */
 
-  /* Botón Cancelar (NEUTRAL) */
-  ion-button[color="danger"] {
-    --background: transparent !important;
-    --color: #888 !important; /* Gris para no distraer del botón principal */
-    --border-radius: 12px;
-    --border-color: #ddd;
-    --border-style: solid;
-    --border-width: 1px;
-    height: 45px;
-    font-weight: 600;
-    margin: 0;
-    font-size: 0.8rem;
-  }
+  height: 50px;                     /* Misma altura que el otro para simetría */
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  margin: 0;
 }
 
 /* 6. CORRECCIÓN PARA EL "NOTCH" INFERIOR */

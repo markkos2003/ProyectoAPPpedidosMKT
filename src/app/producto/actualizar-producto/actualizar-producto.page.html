@@ -15,7 +15,7 @@
   <div class="form-container">
     <form [formGroup]="productoForm" (ngSubmit)="actualizarProducto()">
       
-      <!-- ✅ Muestra imagen existente O previsualización de nueva -->
+      <!--  Muestra imagen existente O previsualización de nueva -->
       <div class="image-preview" *ngIf="imagenPreviewUrl || productoActual?.imagenUrl">
         <img [src]="imagenPreviewUrl || productoActual?.imagen_url" alt="Imagen del Producto"> 
         <ion-button fill="clear" color="danger" (click)="eliminarImagen()">
@@ -23,7 +23,7 @@
         </ion-button>
       </div>
 
-      <!-- ✅ Botón para cambiar imagen -->
+      <!--  Botón para cambiar imagen -->
       <ion-button expand="block" fill="outline" (click)="seleccionarImagen()" type="button">
         <ion-icon slot="start" name="camera"></ion-icon>
         {{ (imagenPreviewUrl || productoActual?.imagen_url) ? 'CAMBIAR IMAGEN' : 'AGREGAR IMAGEN' }}
@@ -43,7 +43,7 @@
         (change)="onFileSelected($event)" 
         style="display: none;">
 
-      <!-- ... resto de tus campos ... -->
+      <!-- ... resto de  campos ... -->
 
       <ion-item>
         <ion-label position="floating">Nombre del Producto *</ion-label>
@@ -159,7 +159,7 @@
          <ion-row>
 
           <ion-col size="6">
-             <!-- ✅ Cambio en validación: permite actualizar sin cambiar imagen -->
+             <!--  Cambio en validación: permite actualizar sin cambiar imagen -->
       <ion-button 
         expand="block" 
         type="submit" 
