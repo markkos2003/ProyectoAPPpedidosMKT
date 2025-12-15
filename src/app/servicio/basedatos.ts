@@ -434,6 +434,21 @@ const docRef = doc(this.conexion, 'pedidos', idpedido);
 }
 
 
+//para loDE AUMENTAR EL STOCK
+
+async aumentarStock(productoId: string, tallas: { s: number, m: number, l: number }) {
+  const productoRef = doc(this.conexion, 'productos', productoId);
+
+  // Usamos 'increment' para sumar lo que llegue (ej: +10) al valor que ya exista
+  // Nota: Asegúrate que en tu BD el campo se llame 'stock_por_talla' o como lo tengas definido
+  await updateDoc(productoRef, {
+    'stock_por_talla.S': increment(tallas.s || 0),
+    'stock_por_talla.M': increment(tallas.m || 0),
+    'stock_por_talla.L': increment(tallas.l || 0)
+  });
+}
+
+
 
   
 }

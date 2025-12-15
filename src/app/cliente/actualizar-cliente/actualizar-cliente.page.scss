@@ -1,0 +1,119 @@
+/*ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --color: white;
+    
+    ion-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+    
+    ion-button {
+      --color: white;
+    }
+  }
+}*/
+
+/* 1. HEADER: UNIÓN PERFECTA CON EL TECHO */
+ion-header {
+  background-color: #4DB6AC !important; /* Esmeralda MKT */
+  box-shadow: none !important;
+  border: none !important;
+
+  ion-toolbar {
+    --background: #4DB6AC;
+    --color: white;
+    --border-width: 0 !important;
+    padding-top: var(--ion-safe-area-top); /* Mata la franja blanca */
+
+    ion-title {
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 1.1rem;
+    }
+
+    /* Botón de volver */
+    ion-button {
+      --color: white;
+    }
+  }
+}
+
+/* 2. FONDO DE PANTALLA */
+ion-content {
+  --background: #f4f7f6; /* Gris suave de fondo */
+}
+
+/* 3. EL FORMULARIO COMO UNA TARJETA (FICHA) */
+ion-list {
+  background: white !important;
+  margin: 20px 16px !important; /* Crea el efecto de tarjeta separada */
+  border-radius: 16px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06) !important;
+  padding: 10px 0 !important;
+}
+
+/* 4. ESTILO DE LOS INPUTS */
+ion-item {
+  --background: transparent;
+  --padding-start: 20px;
+  --inner-padding-end: 20px;
+  margin-bottom: 5px;
+
+  ion-label {
+    color: #4DB6AC !important; /* Etiquetas en Esmeralda */
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+    text-transform: uppercase;
+    margin-bottom: 8px !important;
+  }
+
+  ion-input {
+    font-size: 0.95rem;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    color: #2c3e50;
+  }
+}
+
+/* 5. CAJA DE BOTONES (ESTILO MKT) */
+.cajabotones {
+  padding: 0 16px 30px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  /* Botón Actualizar (NARANJA) */
+  ion-button[color="success"] {
+    --background: #FF8C42 !important; /* Tu Naranja de marca */
+    --background-activated: #e67e3a;
+    --color: white;
+    --border-radius: 12px;
+    height: 50px;
+    font-weight: 700;
+    margin: 0;
+    box-shadow: 0 4px 12px rgba(255, 140, 66, 0.3);
+  }
+
+  /* Botón Cancelar (NEUTRAL) */
+  ion-button[color="danger"] {
+    --background: transparent !important;
+    --color: #888 !important; /* Gris para no distraer del botón principal */
+    --border-radius: 12px;
+    --border-color: #ddd;
+    --border-style: solid;
+    --border-width: 1px;
+    height: 45px;
+    font-weight: 600;
+    margin: 0;
+    font-size: 0.8rem;
+  }
+}
+
+/* 6. CORRECCIÓN PARA EL "NOTCH" INFERIOR */
+form {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}

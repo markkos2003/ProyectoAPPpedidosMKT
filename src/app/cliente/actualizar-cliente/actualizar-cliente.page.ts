@@ -176,7 +176,15 @@ control?.markAsTouched();
 
 }
 
+cancelar(){
 
+     this.clienteForm.reset();
+
+      const activo = document.activeElement as HTMLElement | null;
+      if (activo) activo.blur();
+          this.ruta.navigate(['/listar-cliente']);
+
+  }
 
 
 

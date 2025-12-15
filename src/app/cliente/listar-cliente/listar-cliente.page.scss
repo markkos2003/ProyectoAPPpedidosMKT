@@ -2,10 +2,21 @@ ion-content {
   --background: #f6f8fc;
 }
 
-ion-toolbar {
-  --background: #1976d2;
-  --color: #fff;
-  font-weight: 500;
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --color: white;
+    
+    ion-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+    
+    ion-button {
+      --color: white;
+    }
+  }
 }
 
 ion-title {
