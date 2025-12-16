@@ -262,7 +262,7 @@
 
     <ion-content class="ion-padding">
       <div *ngIf="productoTemporal">
-        <p class="texto-centro-modal">Precio Unitario: <b>${{productoTemporal.precio}}</b></p>
+        <p class="texto-centro-modal">Precio Unitario: <b>S/{{productoTemporal.precio}}</b></p>
         <ion-grid>
           <ion-row>
             <ion-col size="4" *ngFor="let talla of ['S','M','L']">
